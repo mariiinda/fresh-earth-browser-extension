@@ -1,0 +1,90 @@
+/** @jsx jsx */
+import { jsx, css } from "@emotion/core";
+
+import { useImageSource } from "../../state/useImageSource";
+import { useLocalization } from "../../state/useLocalization";
+
+import StatusItem from "./StatusItem";
+
+// CSS
+const componentStyle = css`
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  text-align: right;
+  font-family: var(--title-font);
+  letter-spacing: 1px;
+  font-size: 1.2rem;
+  color: var(--main-bg-color);
+  line-height: 3rem;
+`;
+
+function Component() {
+  // hooks
+  const {
+    state: {
+      refreshDate = null,
+      activeSource = {},
+      hasImageLoadError = false,
+      isImageLoading = false
+    }
+  } = useImageSource();
+
+  var options = {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    hour: "numeric",
+    minute: "numeric"
+  };
+  const {
+    state: { copy }
+  } = useLocalization();
+  const date = new Date(refreshDate).toLocaleDateString("en-GB", options);
+
+  const isOffline = !(window.navigator && window.navigator.onLine);
+  return (
+    <div css={componentStyle}>
+      <StatusItem
+        isVisible={activeSource.label}
+        label={copy.satellite}
+        value={activeSource.spacecraft}
+      />
+
+      <StatusItem
+        isVisible={activeSource.label}
+        label={copy.view}
+        value={activeSource.label}
+      />
+
+      <StatusItem
+        isVisible={isImageLoading}
+        label={copy.status}
+        value={copy.loading}
+        isLoading={true}
+      />
+
+      <StatusItem
+        isVisible={
+          refreshDate !== null && date !== "Invalid Date" && !isImageLoading
+        }
+        label={copy.refreshed}
+        value={date}
+      />
+
+      <StatusItem
+        isVisible={isOffline}
+        label={copy.status}
+        value={copy.offline}
+      />
+
+      <StatusItem
+        isVisible={hasImageLoadError}
+        label={copy.status}
+        value={copy.imageError}
+      />
+    </div>
+  );
+}
+
+export default Component;
