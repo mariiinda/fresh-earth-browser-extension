@@ -1,0 +1,23 @@
+{
+  "manifest_version": 2,
+  "name": "Fresh Earth",
+  "author": "Marinda S",
+  "version": "1.0.1",
+  "description": "Fresh Earth picks fresh and sharp satellite images and delivers it straight to your browser tab.",
+  "icons": {
+    "16": "16.png",
+    "48": "48.png",
+    "128": "128.png",
+    "512": "512.png"
+  },
+  "chrome_url_overrides": {
+    "newtab": "index.html"
+  },
+  "permissions": ["storage", "tabs"],
+  "web_accessible_resources": [
+    "images/goes-east-5424x5424.jpg",
+    "images/goes-west-5424x5424.jpg",
+    "images/himiwarifull_disk_ahi_true_color.jpg",
+    "images/continental-us-5000x3000.jpg"
+  ]
+}
