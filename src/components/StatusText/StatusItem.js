@@ -1,6 +1,4 @@
 /** @jsx jsx */
-// eslint-disable-next-line
-import React from "react";
 import { jsx, css, keyframes } from "@emotion/core";
 import posed from "react-pose";
 
