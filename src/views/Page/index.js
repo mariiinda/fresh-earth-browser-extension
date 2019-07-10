@@ -2,6 +2,7 @@
 import { useReducer, useState, useEffect } from "react";
 import { jsx, css } from "@emotion/core";
 
+// components
 import AppButton from "../../components/AppButton";
 import MenuButton from "../../components/SlidingMenu/MenuButton";
 import SlidingMenu from "../../components/SlidingMenu";
@@ -10,11 +11,13 @@ import Tabs from "../../components/Tabs";
 import AboutTab from "../AboutTab";
 import SettingsTab from "../SettingsTab";
 import StatusText from "../../components/StatusText";
+import ImageCarousel from "../../components/ImageCarousel";
 
 // state
 import MenuReducer from "../../state/menu";
 import { ImageSourceProvider } from "../../state/useImageSource";
 import { useLocalization } from "../../state/useLocalization";
+
 // utils
 import StorageWrapper from "../../storage/storageWrapper";
 
@@ -46,7 +49,6 @@ const navStyle = menuIsOpen => css`
 `;
 
 function Component() {
-  // hooks
   const [menuState, menuDispatch] = useReducer(MenuReducer, { isOpen: false });
   const [mouseClicked, setMouseClicked] = useState(false);
   const { isOpen: menuIsOpen } = menuState;
@@ -58,6 +60,7 @@ function Component() {
     setLanguage
   } = useLocalization();
 
+  // set initial language
   useEffect(() => {
     async function fetchLanguageSetting() {
       const localizationState = await StorageWrapper.get("localizationState");
@@ -95,6 +98,7 @@ function Component() {
       </nav>
 
       <ImageSourceProvider>
+        <ImageCarousel isMenuOpen={menuState.isOpen} closeMenu={closeMenu} />
         <SlidingMenu onClose={closeMenu} isOpen={menuState.isOpen}>
           <Logo isMenuOpen={menuState.isOpen} />
           <Tabs tabList={copy.tabList} isMenuOpen={menuState.isOpen}>

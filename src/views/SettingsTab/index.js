@@ -30,7 +30,7 @@ const fieldsetStyle = css`
 
 const selectWrapper = css`
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(2, 160px);
   grid-gap: 6px;
   margin-bottom: 20px;
 `;
@@ -90,7 +90,7 @@ function Component({ isMenuOpen = false }) {
           <legend css={legendStyle}>{copy.imageSelectLegend}</legend>
 
           <div css={selectWrapper}>
-            {imageSources.map(({ id, label, thumb }, index) => {
+            {imageSources.map(({ id, label, placeholder }, index) => {
               const isChecked = selectedSourceIds.includes(id);
               const isDisabled = isChecked && selectedSourceIds.length === 1;
               return (
@@ -100,7 +100,7 @@ function Component({ isMenuOpen = false }) {
                   id={id}
                   index={index}
                   label={label}
-                  thumb={thumb}
+                  placeholder={placeholder}
                   onChange={handleImageSelectChange}
                   checked={isChecked}
                   disabled={isDisabled}

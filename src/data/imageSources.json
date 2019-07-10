@@ -1,44 +1,44 @@
 [
   {
-    "id": "Continental US",
-    "spacecraft": "GOES-East",
-    "label": "Continental US",
-    "thumb": "images/continental-us-5000x3000.jpg",
-    "src": "images/original/continental-us-5000x3000.jpg"
-  },
-  {
-    "id": "Tropical Atlantic",
-    "spacecraft": "GOES-East",
-    "label": "Tropical Atlantic",
-    "thumb": "images/tropical-atlantic3600x2160.jpg",
-    "src": "images/original/tropical-atlantic3600x2160.jpg"
-  },
-  {
-    "id": "Tropical Pacific",
-    "spacecraft": "GOES-West",
-    "label": "Tropical Pacific",
-    "thumb": "images/tropical-pacific3600x2160.jpg",
-    "src": "images/original/tropical-pacific3600x2160.jpg"
-  },
-  {
     "id": "GOES-East Full Disk",
     "spacecraft": "GOES East",
     "label": "GOES East Full Disk",
-    "thumb": "images/goes-east-5424x5424.jpg",
+    "placeholder": "images/goes-east-5424x5424.jpg",
     "src": "images/original/goes-east-5424x5424.jpg"
   },
   {
     "id": "GOES-West Full Disk",
     "spacecraft": "GOES West",
     "label": "GOES West Full Disk",
-    "thumb": "images/goes-west-5424x5424.jpg",
+    "placeholder": "images/goes-west-5424x5424.jpg",
     "src": "images/original/goes-west-5424x5424.jpg"
   },
   {
     "id": "Himawari-8 Full Disk",
     "spacecraft": "Himawari 8",
     "label": "Himawari 8 Full Disk",
-    "thumb": "images/himiwarifull_disk_ahi_true_color.jpg",
+    "placeholder": "images/himiwarifull_disk_ahi_true_color.jpg",
     "src": "images/original/himiwarifull_disk_ahi_true_color.jpg"
+  },
+  {
+    "id": "Continental US",
+    "spacecraft": "GOES-East",
+    "label": "Continental US",
+    "placeholder": "images/continental-us-5000x3000.jpg",
+    "src": "images/original/continental-us-5000x3000.jpg"
+  },
+  {
+    "id": "Tropical Atlantic",
+    "spacecraft": "GOES-East",
+    "label": "Tropical Atlantic",
+    "placeholder": "images/tropical-atlantic3600x2160.jpg",
+    "src": "images/original/tropical-atlantic3600x2160.jpg"
+  },
+  {
+    "id": "Tropical Pacific",
+    "spacecraft": "GOES-West",
+    "label": "Tropical Pacific",
+    "placeholder": "images/tropical-pacific3600x2160.jpg",
+    "src": "images/original/tropical-pacific3600x2160.jpg"
   }
 ]
