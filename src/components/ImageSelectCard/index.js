@@ -177,7 +177,7 @@ function Component({
       <input
         css={inputStyle}
         name={id}
-        id={`${id}-input`}
+        id={`input-${id}`}
         checked={checked}
         type="checkbox"
         disabled={disabled}
@@ -185,7 +185,7 @@ function Component({
           onChange({ target, id });
         }}
       />
-      <label css={labelWrapperStyle(disabled)} htmlFor={`${id}-input`}>
+      <label css={labelWrapperStyle(disabled)} htmlFor={`input${id}`}>
         <span css={labelStyle}>
           <span>{label}</span>
         </span>

@@ -106,14 +106,14 @@ function Component({ id = "", label = "", onChange, checked = false }) {
       <input
         css={inputStyle}
         name={id}
-        id={`${id}-radio-input`}
+        id={`radio-input-${id}`}
         checked={checked}
         type="radio"
         onChange={({ target }) => {
           onChange({ target, id });
         }}
       />
-      <label css={labelWrapperStyle()} htmlFor={`${id}-radio-input`}>
+      <label css={labelWrapperStyle()} htmlFor={`radio-input-${id}`}>
         <span css={labelStyle}>
           <span>{label}</span>
         </span>

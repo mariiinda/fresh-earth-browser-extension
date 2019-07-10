@@ -1,41 +1,41 @@
 [
   {
-    "id": "GOES-East Full Disk",
+    "id": "goes-east-full-disk",
     "spacecraft": "GOES East",
     "label": "GOES East Full Disk",
     "placeholder": "images/goes-east-5424x5424.jpg",
     "src": "images/original/goes-east-5424x5424.jpg"
   },
   {
-    "id": "GOES-West Full Disk",
+    "id": "goes-west-full-disk",
     "spacecraft": "GOES West",
     "label": "GOES West Full Disk",
     "placeholder": "images/goes-west-5424x5424.jpg",
     "src": "images/original/goes-west-5424x5424.jpg"
   },
   {
-    "id": "Himawari-8 Full Disk",
+    "id": "himawari-8-full-disk",
     "spacecraft": "Himawari 8",
     "label": "Himawari 8 Full Disk",
     "placeholder": "images/himiwarifull_disk_ahi_true_color.jpg",
     "src": "images/original/himiwarifull_disk_ahi_true_color.jpg"
   },
   {
-    "id": "Continental US",
+    "id": "continental-us",
     "spacecraft": "GOES-East",
     "label": "Continental US",
     "placeholder": "images/continental-us-5000x3000.jpg",
     "src": "images/original/continental-us-5000x3000.jpg"
   },
   {
-    "id": "Tropical Atlantic",
+    "id": "tropical-atlantic",
     "spacecraft": "GOES-East",
     "label": "Tropical Atlantic",
     "placeholder": "images/tropical-atlantic3600x2160.jpg",
     "src": "images/original/tropical-atlantic3600x2160.jpg"
   },
   {
-    "id": "Tropical Pacific",
+    "id": "tropical-pacific",
     "spacecraft": "GOES-West",
     "label": "Tropical Pacific",
     "placeholder": "images/tropical-pacific3600x2160.jpg",
