@@ -185,7 +185,7 @@ function Component({
           onChange({ target, id });
         }}
       />
-      <label css={labelWrapperStyle(disabled)} htmlFor={`input${id}`}>
+      <label css={labelWrapperStyle(disabled)} htmlFor={`input-${id}`}>
         <span css={labelStyle}>
           <span>{label}</span>
         </span>
