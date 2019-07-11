@@ -9,6 +9,7 @@ const loadImage = ({ src }) => {
   console.log("Image load:", { src });
   return new Promise((resolve, reject) => {
     img.onload = ({ target }) => {
+      console.log("preload img loading done")
       resolve(target.src);
     };
     img.onerror = error => {
