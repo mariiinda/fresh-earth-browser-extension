@@ -11,7 +11,7 @@ const componentStyle = ({
   isGoesEastFullDisk = false
 }) => css`
   position: absolute;
-  top: ${isFullDisk ? "5%" : "0"};
+  top: ${isFullDisk ? "calc(5% - 10px)" : "0"};
   left: ${isFullDisk ? "5%" : "0"};
   width: ${isFullDisk ? "90%" : "100%"};
   height: ${isFullDisk ? "90%" : "100%"};
@@ -133,13 +133,13 @@ function FullImage({
           }
         }}
       >
-        {isActive && (
-          <img
-            css={imageStyle({ isFullDisk })}
-            src={iLoaded ? src : ""}
-            alt={label}
-          />
-        )}
+        {/*  //{isActive && ( */}
+        <img
+          css={imageStyle({ isFullDisk })}
+          src={iLoaded ? src : ""}
+          alt={label}
+        />
+        {/*  //)} */}
       </div>
       <div css={maskStyle({ isFullDisk, isGoesEastFullDisk })}>
         <svg viewBox="100 0 200 200" xmlns="http://www.w3.org/2000/svg">
