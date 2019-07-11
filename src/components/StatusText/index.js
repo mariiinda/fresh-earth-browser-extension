@@ -23,19 +23,12 @@ const componentStyle = css`
 function Component() {
   // hooks
   const {
-    state: {
-      refreshDate = null,
-      activeSource = {},
-      hasImageLoadError = false,
-      isImageLoading = false
-    }
+    state: { activeSource = {} }
   } = useImageSource();
 
   const {
-    state: { isPending, hasError }
+    state: { isPending, hasError, refreshDate = null }
   } = useNotifications();
-
-  console.log({ isPending, hasError });
 
   var options = {
     year: "numeric",
@@ -86,9 +79,11 @@ function Component() {
       />
 
       <StatusItem
-        isVisible={hasImageLoadError}
+        isVisible={hasError}
         label={copy.status}
         value={copy.imageError}
+        isLoading={true}
+        isError={true}
       />
     </div>
   );

@@ -8,37 +8,52 @@ const componentStyle = css`
   padding: 0;
   overflow: hidden;
 `;
+
 const bounce = keyframes`
-  0%{background-position:0% 50%}
-    50%{background-position:100% 50%}
-    100%{background-position:0% 50%}
+  0%{transform: translate3d(-10%,0,0)}
+    50%{transform: translate3d(-50%,0,0)}
+    100%{transform: translate3d(-10%,0,0)}
 `;
-const wrapperStyle = isLoading => css`
+
+const wrapperStyle = ({ isLoading, isError }) => css`
   position: relative;
   background: white;
-  padding: 2px;
+  overflow: hidden;
+  display: inline-block;
+  height: 24px;
+  line-height: 0;
+
   &:after {
     content: "";
     position: absolute;
     left: 0;
     bottom: 0;
-    width: 99%;
+    width: 400%;
     height: 2px;
     background: blue;
     display: ${isLoading ? "block" : "none"};
     transform: translate3d(0, 0, 0);
-    background: linear-gradient(270deg, #37cda6, #e4fafa, #fcf2ee);
-    background-size: 600% 600%;
+    background: ${isError
+      ? "linear-gradient(270deg, #f74f0c, #ee4806, #ffbca2)"
+      : "linear-gradient(270deg, #e4fafa, #01d59b, #01d59b)"};
+    background-size: 100% 100%;
     animation: ${bounce} 1s ease-in-out infinite;
   }
 `;
 
 const labelStyle = css`
   opacity: 0.9;
+  display: inline-block;
+  height: 24px;
+  line-height: 2rem;
 `;
+
 const nameStyle = css`
   background: var(--secondary-highlight-color);
   padding: 2px;
+  display: inline-block;
+  height: 24px;
+  line-height: 2rem;
 `;
 
 // Animation
@@ -55,11 +70,12 @@ function Component({
   isVisible = false,
   label = "",
   value = "",
-  isLoading = false
+  isLoading = false,
+  isError = false
 }) {
   return (
     <Box css={componentStyle} pose={isVisible ? "visible" : "hidden"}>
-      <span css={wrapperStyle(isLoading)}>
+      <span css={wrapperStyle({ isLoading, isError })}>
         <span css={labelStyle}>&nbsp;{label}:&nbsp;</span>
         <span css={nameStyle}>&nbsp;{value}&nbsp;</span>
       </span>

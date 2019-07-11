@@ -158,7 +158,7 @@ const copy = {
   status: "Status",
   offline: "Offline",
   loading: "Refreshing",
-  imageError: "Latest image unreachable"
+  imageError: "Image offline"
 };
 
 export { copy };

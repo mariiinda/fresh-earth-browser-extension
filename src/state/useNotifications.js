@@ -15,6 +15,9 @@ function reducer(state, action) {
     case "SET_HAS_ERROR":
       return { ...state, hasError: action.hasError };
 
+    case "SET_REFRESH_DATE":
+      return { ...state, refreshDate: action.refreshDate };
+
     default:
       throw new Error();
   }
@@ -37,9 +40,19 @@ function useNotifications() {
     );
   }
   const [state, dispatch] = context;
-  const setHasError = hasError => dispatch({ type: "SET_HAS_ERROR", hasError });
+
+  const setHasError = useCallback(
+    hasError => dispatch({ type: "SET_HAS_ERROR", hasError }),
+    [dispatch]
+  );
+
   const setIsPending = useCallback(
     isPending => dispatch({ type: "SET_IS_PENDING", isPending }),
+    [dispatch]
+  );
+
+  const setRefreshDate = useCallback(
+    refreshDate => dispatch({ type: "SET_REFRESH_DATE", refreshDate }),
     [dispatch]
   );
 
@@ -47,7 +60,8 @@ function useNotifications() {
     state,
     dispatch,
     setHasError,
-    setIsPending
+    setIsPending,
+    setRefreshDate
   };
 }
 
