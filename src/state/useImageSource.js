@@ -11,8 +11,8 @@ const initialState = {
   activeSource: {},
   selectedSourceIds: [],
   selectedSources: [],
-  selectedImageRefreshInterval: 0.14 * 60e3,
-  imageRefreshIntervalOptions: [0.14 * 60e3, 20 * 60e3, 60 * 60e3]
+  selectedImageRefreshInterval: 0.24 * 60e3,
+  imageRefreshIntervalOptions: [0.24 * 60e3, 20 * 60e3, 60 * 60e3]
 };
 
 const updateSelectedSourceIds = ({ state, action, isRemove = false }) => {
