@@ -3,15 +3,25 @@ import { useState, useEffect } from "react";
 import { jsx, css } from "@emotion/core";
 
 import useImageLoad from "./useImageLoad";
-import { useNotifications } from "../../state/useNotifications";
+//import { useNotifications } from "../../state/useNotifications";
 
 // CSS
-const componentStyle = ({ isActive }) => css`
-  position: relative;
-  border: ${isActive ? "1px solid red" : "transparent"};
+const componentStyle = ({
+  isFullDisk = false,
+  isGoesEastFullDisk = false
+}) => css`
+  position: absolute;
+  top: ${isFullDisk ? "5%" : "0"};
+  left: ${isFullDisk ? "5%" : "0"};
+  width: ${isFullDisk ? "90%" : "100%"};
+  height: ${isFullDisk ? "90%" : "100%"};
 `;
 
-const imgWrapperStyle = ({ isVisible = false }) => css`
+const imgWrapperStyle = ({
+  isVisible = false,
+  isFullDisk = false,
+  isGoesEastFullDisk = false
+}) => css`
   position: absolute;
   top: 0;
   left: 0;
@@ -28,6 +38,22 @@ const imageStyle = ({ isVisible = false, isFullDisk = false }) => css`
   object-fit: ${isFullDisk ? "contain" : "cover"};
 `;
 
+const maskStyle = ({ isFullDisk = false, isGoesEastFullDisk = false }) => css`
+  position: absolute;
+  top: ${isGoesEastFullDisk ? "-9px" : 0};
+  left: 0;
+  width: 100%;
+  height: 100%;
+  outline: 40px solid var(--main-bg-color);
+  display: ${isFullDisk ? "block" : "none"};
+
+  > svg {
+    width: 100%;
+    height: 100%;
+    fill: var(--main-bg-color);
+  }
+`;
+
 function FullImage({
   label = "",
   placeholder = "",
@@ -40,7 +66,7 @@ function FullImage({
   const [bottomImageVisible, setBottomImageVisible] = useState(false);
   const [topImageVisible, setTopImageVisible] = useState(false);
 
-  const { isPending } = useNotifications();
+  //const { isPending } = useNotifications();
 
   useEffect(() => {
     if (topImageVisible) {
@@ -49,29 +75,33 @@ function FullImage({
     }
   }, [topImageVisible, setReadyToUpdate]);
 
-  useEffect(() => {
+  /*  useEffect(() => {
     if (isPending) {
       console.log("pending - set ready to update false----");
       setReadyToUpdate(false);
     }
-  }, [isPending, setReadyToUpdate]);
+  }, [isPending, setReadyToUpdate]); */
 
   const isFullDisk = label.includes("Full Disk");
-  //const isGoesEastFullDisk = label.includes("GOES East Full Disk");
+  const isGoesEastFullDisk = label.includes("GOES East Full Disk");
   //console.log({ isFullDisk, isGoesEastFullDisk });
 
   return (
-    <div css={componentStyle({ isActive })}>
+    <div css={componentStyle({ isFullDisk, isGoesEastFullDisk })}>
       <div
-        css={imgWrapperStyle({ isVisible: bottomImageLoaded && isActive })}
+        css={imgWrapperStyle({
+          isVisible: bottomImageLoaded && isActive,
+          isFullDisk,
+          isGoesEastFullDisk
+        })}
         onTransitionEnd={({ target }) => {
           const { opacity } = getComputedStyle(target);
           if (opacity === "1") {
-            console.log("bottom img visible");
+            //console.log("bottom img visible");
             setBottomImageVisible(true);
           }
           if (opacity === "0") {
-            console.log("bottom img hidden");
+            //console.log("bottom img hidden");
             setBottomImageVisible(false);
           }
         }}
@@ -86,29 +116,39 @@ function FullImage({
         />
       </div>
       <div
-        css={imgWrapperStyle({ isVisible: bottomImageVisible })}
+        css={imgWrapperStyle({
+          isVisible: bottomImageVisible,
+          isFullDisk,
+          isGoesEastFullDisk
+        })}
         onTransitionEnd={({ target }) => {
           const { opacity } = getComputedStyle(target);
           if (opacity === "1") {
-            console.log("top img visible");
+            //console.log("top img visible");
             setTopImageVisible(true);
           }
           if (opacity === "0") {
-            console.log("top img hidden");
+            //console.log("top img hidden");
             setTopImageVisible(false);
           }
         }}
       >
         {isActive && (
           <img
-            /*onLoad={() => {
-            console.log("loading dom image done");
-          }}*/
             css={imageStyle({ isFullDisk })}
             src={iLoaded ? src : ""}
             alt={label}
           />
         )}
+      </div>
+      <div css={maskStyle({ isFullDisk, isGoesEastFullDisk })}>
+        <svg viewBox="100 0 200 200" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M0 0h400v200H0V0zm200 200c-55.228 0-100-44.772-100-100S144.772 0 200 0s100 44.772 100 100-44.772 100-100 100zM0 200h400v20H0v-20z"
+            fill="inherit"
+            fillRule="evenodd"
+          />
+        </svg>
       </div>
     </div>
   );

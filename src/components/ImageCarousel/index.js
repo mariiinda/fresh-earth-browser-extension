@@ -19,9 +19,11 @@ const componentStyle = css`
   left: 0;
   width: 100%;
   height: 100%;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(2, 1fr);
+  ${"" /* display: flex;
+  justify-content: center;
+  align-items: center; */}
+  ${"" /* grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 1fr); */}
 `;
 
 function ImageCarousel({ isMenuOpen = false, closeMenu }) {
@@ -71,10 +73,10 @@ function ImageCarousel({ isMenuOpen = false, closeMenu }) {
   const setActiveImage = useCallback(
     nextActiveIndex => {
       const nextActiveId = selectedSources[nextActiveIndex].id;
-      console.log("Setting next active image", {
+      /* console.log("Setting next active image", {
         nextActiveIndex,
         nextActiveId
-      });
+      }); */
       setActiveIndex(nextActiveIndex);
       setActiveId(nextActiveId);
     },
@@ -84,20 +86,17 @@ function ImageCarousel({ isMenuOpen = false, closeMenu }) {
   useEffect(() => {
     let timer = null;
     if (readyToUpdate) {
-      console.log("ready to update, setting timer");
+      //console.log("ready to update, setting timer");
       timer = setTimeout(() => {
-        console.log("update timer running");
+        //console.log("update timer running");
         const nextActiveIndex =
           activeIndex + 1 > selectedSources.length - 1 ? 0 : activeIndex + 1;
         setActiveImage(nextActiveIndex);
       }, selectedImageRefreshInterval);
-      //}, 5000);
     }
     return () => {
-      //if (!readyToUpdate) {
-        console.log("cleaning up timer");
-        clearTimeout(timer);
-      //}
+      //console.log("cleaning up timer");
+      clearTimeout(timer);
     };
   }, [
     readyToUpdate,
