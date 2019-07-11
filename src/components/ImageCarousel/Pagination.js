@@ -9,7 +9,7 @@ const componentStyle = css`
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 120px;
+  height: 50px;
   display: flex;
   justify-content: center;
   align-items: center;

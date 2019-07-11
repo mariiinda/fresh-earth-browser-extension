@@ -111,7 +111,7 @@ function ImageCarousel({ isMenuOpen = false, closeMenu }) {
   };
 
   return (
-    <div css={componentStyle}>
+    <div css={componentStyle} onClick={closeMenu}>
       {selectedSources.length > 0 &&
         selectedSources.map(({ id, label, placeholder, src }) => {
           const isActive = activeSource.id === id;

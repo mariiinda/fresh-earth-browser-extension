@@ -4,8 +4,8 @@ import { jsx, css } from "@emotion/core";
 // CSS
 const componentStyle = ({ isActive = false }) => css`
   position: relative;
-  width: 20px;
-  height: 20px;
+  width: 10px;
+  height: 10px;
   background: ${isActive ? "rgba(255,255,255,0.8)" : "rgba(255,255,255,0.3)"};
   border-radius: 50%;
   margin-right: 10px;
@@ -39,7 +39,7 @@ const componentStyle = ({ isActive = false }) => css`
 const labelStyle = ({ isActive = false }) => css`
   display: inline-block;
   position: absolute;
-  bottom: 30px;
+  bottom: 14px;
   left: 0;
   background: white;
   transform: translate3d(-50%, 0, 0);
