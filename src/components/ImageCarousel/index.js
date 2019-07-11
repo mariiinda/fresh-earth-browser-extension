@@ -18,26 +18,15 @@ const componentStyle = css`
   left: 0;
   width: 100%;
   height: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 1fr);
 `;
 
-function Component({ isMenuOpen = false, closeMenu }) {
+function ImageCarousel({ isMenuOpen = false, closeMenu }) {
   const {
-    state: {
-      activeIndex = "",
-      imageSources = [],
-      selectedSources = [],
-      selectedSourceIds = [],
-      activeSource = {},
-      hasImageLoadError = false,
-      isImageLoading = false,
-      selectedImageRefreshInterval = 0
-    },
-    setActiveId,
-    setActiveIndex,
-    setRefreshDate,
-    setState,
-    setImageLoadError,
-    setIsImageLoading
+    state: { imageSources = [], selectedSources = [], activeSource = {} },
+    setState
   } = useImageSource();
 
   // set initial image source state
@@ -72,16 +61,20 @@ function Component({ isMenuOpen = false, closeMenu }) {
   return (
     <div css={componentStyle}>
       {selectedSources.length > 0 &&
-        selectedSources.map(({ id, label, placeholder, src }) => (
-          <FullImage
-            key={id}
-            label={label}
-            placeholder={placeholder}
-            src={src}
-          />
-        ))}
+        selectedSources.map(({ id, label, placeholder, src }) => {
+          const isActive = activeSource.id === id;
+          return (
+            <FullImage
+              key={id}
+              label={label}
+              placeholder={placeholder}
+              src={isActive ? src : ""}
+              isActive={isActive}
+            />
+          );
+        })}
     </div>
   );
 }
 
-export default Component;
+export default ImageCarousel;

@@ -16,6 +16,7 @@ import ImageCarousel from "../../components/ImageCarousel";
 // state
 import MenuReducer from "../../state/menu";
 import { ImageSourceProvider } from "../../state/useImageSource";
+import { NotificationsProvider } from "../../state/useNotifications";
 import { useLocalization } from "../../state/useLocalization";
 
 // utils
@@ -98,15 +99,18 @@ function Component() {
       </nav>
 
       <ImageSourceProvider>
-        <ImageCarousel isMenuOpen={menuState.isOpen} closeMenu={closeMenu} />
-        <SlidingMenu onClose={closeMenu} isOpen={menuState.isOpen}>
-          <Logo isMenuOpen={menuState.isOpen} />
-          <Tabs tabList={copy.tabList} isMenuOpen={menuState.isOpen}>
-            <SettingsTab isMenuOpen={menuState.isOpen} />
-            <AboutTab />
-          </Tabs>
-        </SlidingMenu>
-        <StatusText />
+        <NotificationsProvider>
+          <ImageCarousel isMenuOpen={menuState.isOpen} closeMenu={closeMenu} />
+          <SlidingMenu onClose={closeMenu} isOpen={menuState.isOpen}>
+            <Logo isMenuOpen={menuState.isOpen} />
+            <Tabs tabList={copy.tabList} isMenuOpen={menuState.isOpen}>
+              <SettingsTab isMenuOpen={menuState.isOpen} />
+              <AboutTab />
+            </Tabs>
+          </SlidingMenu>
+
+          <StatusText />
+        </NotificationsProvider>
       </ImageSourceProvider>
     </div>
   );

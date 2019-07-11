@@ -3,6 +3,7 @@ import { jsx, css } from "@emotion/core";
 
 import { useImageSource } from "../../state/useImageSource";
 import { useLocalization } from "../../state/useLocalization";
+import { useNotifications } from "../../state/useNotifications";
 
 import StatusItem from "./StatusItem";
 
@@ -30,6 +31,12 @@ function Component() {
     }
   } = useImageSource();
 
+  const {
+    state: { isPending, hasError }
+  } = useNotifications();
+
+  console.log({ isPending, hasError });
+
   var options = {
     year: "numeric",
     month: "long",
@@ -46,19 +53,19 @@ function Component() {
   return (
     <div css={componentStyle}>
       <StatusItem
-        isVisible={activeSource.label}
+        isVisible={activeSource.label && !isPending}
         label={copy.satellite}
         value={activeSource.spacecraft}
       />
 
       <StatusItem
-        isVisible={activeSource.label}
+        isVisible={activeSource.label && !isPending}
         label={copy.view}
         value={activeSource.label}
       />
 
       <StatusItem
-        isVisible={isImageLoading}
+        isVisible={isPending}
         label={copy.status}
         value={copy.loading}
         isLoading={true}
@@ -66,7 +73,7 @@ function Component() {
 
       <StatusItem
         isVisible={
-          refreshDate !== null && date !== "Invalid Date" && !isImageLoading
+          refreshDate !== null && date !== "Invalid Date" && !isPending
         }
         label={copy.refreshed}
         value={date}

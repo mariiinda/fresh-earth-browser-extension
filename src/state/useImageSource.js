@@ -4,7 +4,7 @@ import React, { useMemo, useContext } from "react";
 import useImageSourceWithStorage from "../middleware/useImageSourceWithStorage";
 
 // Reducer
-const imageSourcesInitialState = {
+const initialState = {
   activeIndex: "0",
   activeId: "",
   imageSources: [],
@@ -39,7 +39,7 @@ const updateSelectedSourceIds = ({ state, action, isRemove = false }) => {
   };
 };
 
-function imageSourceReducer(state, action) {
+function reducer(state, action) {
   const { type = "" } = action;
   switch (type) {
     case "SET_ACTIVE_INDEX":
@@ -90,10 +90,7 @@ function imageSourceReducer(state, action) {
 // Provider
 const ImageSourceContext = React.createContext();
 function ImageSourceProvider(props) {
-  const [state, dispatch] = useImageSourceWithStorage(
-    imageSourceReducer,
-    imageSourcesInitialState
-  );
+  const [state, dispatch] = useImageSourceWithStorage(reducer, initialState);
   const value = useMemo(() => [state, dispatch], [state, dispatch]);
   return <ImageSourceContext.Provider value={value} {...props} />;
 }
