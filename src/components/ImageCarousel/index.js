@@ -13,12 +13,15 @@ import StorageWrapper from "../../storage/storageWrapper";
 import Pagination from "./Pagination";
 
 // CSS
-const componentStyle = css`
+const componentStyle = ({ isMenuOpen = false }) => css`
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
+  filter: ${isMenuOpen ? "blur(7px)" : "none"};
+  transition: filter 1s 0.75s ease-in-out;
+  will-change: auto;
 `;
 
 function ImageCarousel({ isMenuOpen = false, closeMenu }) {
@@ -102,7 +105,7 @@ function ImageCarousel({ isMenuOpen = false, closeMenu }) {
   };
 
   return (
-    <div css={componentStyle} onClick={closeMenu}>
+    <div css={componentStyle({ isMenuOpen })} onClick={closeMenu}>
       {selectedSources.length > 0 &&
         selectedSources.map(({ id, label, placeholder, src }) => {
           const isActive = activeSource.id === id;
