@@ -16,17 +16,11 @@ const componentStyle = ({ isActive = false }) => css`
     ? "0 0px 8px var(--secondary-highlight-color);"
     : "none"};
   transition: background 0.3s ease-in-out;
+  opacity: 0.8;
 
   &:hover {
     background: rgba(255, 255, 255, 0.6);
     box-shadow: 0 0px 8px var(--main-highlight-color);
-  }
-
-  &:hover,
-  &:focus {
-    span {
-      opacity: 1;
-    }
   }
 
   &:focus {
@@ -36,7 +30,7 @@ const componentStyle = ({ isActive = false }) => css`
   }
 `;
 
-const labelStyle = ({ isActive = false }) => css`
+const labelStyle = css`
   display: inline-block;
   position: absolute;
   bottom: 14px;
@@ -69,7 +63,7 @@ function PaginationItem({
         onClick(index);
       }}
     >
-      <span css={labelStyle({ isActive })}>{label}</span>
+      <span css={labelStyle}>{label}</span>
     </button>
   );
 }
