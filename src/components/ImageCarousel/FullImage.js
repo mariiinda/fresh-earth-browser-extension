@@ -1,25 +1,15 @@
 /** @jsx jsx */
 import { useState, useEffect } from "react";
 import { jsx, css } from "@emotion/core";
-//import posed from "react-pose";
 
 import useImageLoad from "./useImageLoad";
-//import { useNotifications } from "../../state/useNotifications";
+import { useNotifications } from "../../state/useNotifications";
 
 // CSS
 const componentStyle = ({ isActive }) => css`
   position: relative;
   border: ${isActive ? "1px solid red" : "transparent"};
 `;
-
-/* const placeholderStyle = ({ isFullDisk = false }) => css`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: ${isFullDisk ? "contain" : "cover"};
-`; */
 
 const imgWrapperStyle = ({ isVisible = false }) => css`
   position: absolute;
@@ -50,12 +40,21 @@ function FullImage({
   const [bottomImageVisible, setBottomImageVisible] = useState(false);
   const [topImageVisible, setTopImageVisible] = useState(false);
 
+  const { isPending } = useNotifications();
+
   useEffect(() => {
     if (topImageVisible) {
       console.log("Set timer - ready to update");
       setReadyToUpdate(true);
     }
-  }, [topImageVisible]);
+  }, [topImageVisible, setReadyToUpdate]);
+
+  useEffect(() => {
+    if (isPending) {
+      console.log("pending - set ready to update false----");
+      setReadyToUpdate(false);
+    }
+  }, [isPending, setReadyToUpdate]);
 
   const isFullDisk = label.includes("Full Disk");
   //const isGoesEastFullDisk = label.includes("GOES East Full Disk");
@@ -100,14 +99,16 @@ function FullImage({
           }
         }}
       >
-        <img
-          /*onLoad={() => {
+        {isActive && (
+          <img
+            /*onLoad={() => {
             console.log("loading dom image done");
           }}*/
-          css={imageStyle({ isFullDisk })}
-          src={iLoaded ? src : ""}
-          alt={label}
-        />
+            css={imageStyle({ isFullDisk })}
+            src={iLoaded ? src : ""}
+            alt={label}
+          />
+        )}
       </div>
     </div>
   );

@@ -1,5 +1,4 @@
 /** @jsx jsx */
-import { useState, useEffect } from "react";
 import { jsx, css } from "@emotion/core";
 
 import PaginationItem from "./PaginationItem";
@@ -11,7 +10,6 @@ const componentStyle = css`
   left: 0;
   width: 100%;
   height: 120px;
-  outline: 2px dotted orange;
   display: flex;
   justify-content: center;
   align-items: center;

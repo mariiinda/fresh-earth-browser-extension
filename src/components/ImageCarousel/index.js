@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { jsx, css } from "@emotion/core";
 //import posed from "react-pose";
 
@@ -68,62 +68,46 @@ function ImageCarousel({ isMenuOpen = false, closeMenu }) {
     }
   }, [imageSources, setState]);
 
-  const setActiveImage = nextActiveIndex => {
-    const nextActiveId = selectedSources[nextActiveIndex].id;
-    console.log({ nextActiveIndex, nextActiveId });
-    setActiveIndex(nextActiveIndex);
-    setActiveId(nextActiveId);
-  };
+  const setActiveImage = useCallback(
+    nextActiveIndex => {
+      const nextActiveId = selectedSources[nextActiveIndex].id;
+      console.log("Setting next active image", {
+        nextActiveIndex,
+        nextActiveId
+      });
+      setActiveIndex(nextActiveIndex);
+      setActiveId(nextActiveId);
+    },
+    [setActiveIndex, setActiveId, selectedSources]
+  );
 
   useEffect(() => {
     let timer = null;
     if (readyToUpdate) {
+      console.log("ready to update, setting timer");
       timer = setTimeout(() => {
         console.log("update timer running");
         const nextActiveIndex =
           activeIndex + 1 > selectedSources.length - 1 ? 0 : activeIndex + 1;
         setActiveImage(nextActiveIndex);
-        /* const nextActiveId = selectedSources[nextActiveIndex].id;
-        setActiveIndex(nextActiveIndex);
-        setActiveId(nextActiveId); */
-        //}, selectedImageRefreshInterval);
-      }, 5000);
+      }, selectedImageRefreshInterval);
+      //}, 5000);
     }
     return () => {
-      if (!readyToUpdate) {
+      //if (!readyToUpdate) {
         console.log("cleaning up timer");
         clearTimeout(timer);
-      }
-    };
-  }, [readyToUpdate]);
-
-  // Side effect: when image is ready, initiate update loop
-  /*    useEffect(() => {
-    let timer = null;
-    if (imageReadyToReload) {
-      timer = setTimeout(() => {
-        const nextActiveIndex =
-          activeIndex + 1 > selectedSources.length - 1 ? 0 : activeIndex + 1;
-        const nextActiveId = selectedSources[nextActiveIndex].id;
-        setActiveIndex(nextActiveIndex);
-        setActiveId(nextActiveId);
-        setCacheTimeStamp(Date.now());
-      }, selectedImageRefreshInterval);
-    }
-    return () => {
-      !imageReadyToReload && clearTimeout(timer);
+      //}
     };
   }, [
-    imageReadyToReload,
+    readyToUpdate,
+    selectedImageRefreshInterval,
     activeIndex,
     selectedSources,
-    setActiveIndex,
-    setActiveId,
-    selectedImageRefreshInterval
-  ]); */
+    setActiveImage
+  ]);
 
   const onPaginationClick = index => {
-    //setReadyToUpdate(true);
     setActiveImage(index);
   };
 
