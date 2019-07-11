@@ -19,11 +19,6 @@ const componentStyle = css`
   left: 0;
   width: 100%;
   height: 100%;
-  ${"" /* display: flex;
-  justify-content: center;
-  align-items: center; */}
-  ${"" /* grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(2, 1fr); */}
 `;
 
 function ImageCarousel({ isMenuOpen = false, closeMenu }) {
@@ -73,10 +68,6 @@ function ImageCarousel({ isMenuOpen = false, closeMenu }) {
   const setActiveImage = useCallback(
     nextActiveIndex => {
       const nextActiveId = selectedSources[nextActiveIndex].id;
-      /* console.log("Setting next active image", {
-        nextActiveIndex,
-        nextActiveId
-      }); */
       setActiveIndex(nextActiveIndex);
       setActiveId(nextActiveId);
     },

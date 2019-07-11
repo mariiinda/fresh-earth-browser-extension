@@ -92,7 +92,7 @@ function Component({ isMenuOpen = false }) {
           <div css={selectWrapper}>
             {imageSources.map(({ id, label, placeholder }, index) => {
               const isChecked = selectedSourceIds.includes(id);
-              const isDisabled = isChecked && selectedSourceIds.length === 1;
+              const isDisabled = isChecked && selectedSourceIds.length === 2;
               return (
                 <ImageSelectCard
                   key={id}

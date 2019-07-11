@@ -66,25 +66,15 @@ function FullImage({
   const [bottomImageVisible, setBottomImageVisible] = useState(false);
   const [topImageVisible, setTopImageVisible] = useState(false);
 
-  //const { isPending } = useNotifications();
-
   useEffect(() => {
     if (topImageVisible) {
-      console.log("Set timer - ready to update");
+      //console.log("Set timer - ready to update");
       setReadyToUpdate(true);
     }
   }, [topImageVisible, setReadyToUpdate]);
 
-  /*  useEffect(() => {
-    if (isPending) {
-      console.log("pending - set ready to update false----");
-      setReadyToUpdate(false);
-    }
-  }, [isPending, setReadyToUpdate]); */
-
   const isFullDisk = label.includes("Full Disk");
   const isGoesEastFullDisk = label.includes("GOES East Full Disk");
-  //console.log({ isFullDisk, isGoesEastFullDisk });
 
   return (
     <div css={componentStyle({ isFullDisk, isGoesEastFullDisk })}>
@@ -117,7 +107,7 @@ function FullImage({
       </div>
       <div
         css={imgWrapperStyle({
-          isVisible: bottomImageVisible,
+          isVisible: bottomImageVisible && isActive,
           isFullDisk,
           isGoesEastFullDisk
         })}
@@ -133,13 +123,11 @@ function FullImage({
           }
         }}
       >
-        {/*  //{isActive && ( */}
         <img
           css={imageStyle({ isFullDisk })}
           src={iLoaded ? src : ""}
           alt={label}
         />
-        {/*  //)} */}
       </div>
       <div css={maskStyle({ isFullDisk, isGoesEastFullDisk })}>
         <svg viewBox="100 0 200 200" xmlns="http://www.w3.org/2000/svg">
