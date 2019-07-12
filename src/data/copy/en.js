@@ -24,7 +24,7 @@ const copy = {
           rel="noopener noreferrer"
           href="https://www.star.nesdis.noaa.gov/GOES/fulldisk_band.php?sat=G16&band=GEOCOLOR&length=12"
         >
-          GOES EAST True Color Western Hemisphere
+        GOES East Full Disk
         </a>
         <br />
         South America and North America, Coast of West Africa&nbsp;
@@ -44,7 +44,7 @@ const copy = {
           rel="noopener noreferrer"
           href="https://www.star.nesdis.noaa.gov/GOES/fulldisk_band.php?sat=G17&band=GEOCOLOR&length=12"
         >
-          GOES West True Color Western Hemisphere
+        GOES West Full Disk
         </a>
         <br />
         Pacific, Hawaii, North America
