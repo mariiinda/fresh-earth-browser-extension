@@ -9,7 +9,7 @@ const loadImage = ({ src }) => {
   console.log("Image load:", { src });
   return new Promise((resolve, reject) => {
     img.onload = ({ target }) => {
-      console.log("preload img loading done")
+      console.log("preload img loading done");
       resolve(target.src);
     };
     img.onerror = error => {
@@ -18,12 +18,12 @@ const loadImage = ({ src }) => {
   });
 };
 
-function useImageLoad({ src = "" }) {
+function useImageLoad({ src = "", isActive }) {
   const [isLoaded, setIsLoaded] = useState(false);
   const { setHasError, setIsPending, setRefreshDate } = useNotifications();
 
   useEffect(() => {
-    if (src !== "") {
+    if (src !== "" && isActive) {
       setIsPending(true);
       (async () => {
         try {
@@ -39,7 +39,7 @@ function useImageLoad({ src = "" }) {
         }
       })();
     }
-  }, [src, setIsPending, setHasError, setRefreshDate]);
+  }, [src, isActive, setIsPending, setHasError, setRefreshDate]);
   return [isLoaded];
 }
 

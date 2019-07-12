@@ -122,7 +122,7 @@ function ImageCarousel({ isMenuOpen = false, closeMenu }) {
               key={id}
               label={label}
               placeholder={placeholder}
-              src={isActive ? src : ""}
+              src={src}
               isActive={isActive}
               setReadyToUpdate={setReadyToUpdate}
             />

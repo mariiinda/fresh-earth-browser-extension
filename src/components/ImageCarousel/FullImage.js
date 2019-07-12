@@ -17,11 +17,7 @@ const componentStyle = ({
   height: ${isFullDisk ? "90%" : "100%"};
 `;
 
-const imgWrapperStyle = ({
-  isVisible = false,
-  isFullDisk = false,
-  isGoesEastFullDisk = false
-}) => css`
+const imgWrapperStyle = ({ isVisible = false }) => css`
   position: absolute;
   top: 0;
   left: 0;
@@ -61,17 +57,47 @@ function FullImage({
   isActive = false,
   setReadyToUpdate
 }) {
-  const [iLoaded] = useImageLoad({ src });
+  const [bottomImgSrc, setBottomImgSrc] = useState("");
+  const [topImgSrc, setTopImgSrc] = useState("");
   const [bottomImageLoaded, setBottomImageLoaded] = useState(false);
   const [bottomImageVisible, setBottomImageVisible] = useState(false);
   const [topImageVisible, setTopImageVisible] = useState(false);
+  const [isLoaded] = useImageLoad({ isActive, src });
 
   useEffect(() => {
+    if (isActive && placeholder !== "") {
+      console.log("Loading bottom image");
+      setBottomImgSrc(placeholder);
+    }
+  }, [isActive, placeholder]);
+
+  useEffect(() => {
+    if (bottomImageVisible && isLoaded) {
+      console.log("Loading top image");
+      setTopImgSrc(src);
+    }
+  }, [src, bottomImageVisible, isLoaded, setTopImgSrc]);
+
+  /* useEffect(() => {
+    if (isActive && src !=="") {
+      console.log("Is active state changed to true");
+      const [isLoaded] = useImageLoad({ src })
+      setBottomImgSrc(placeholder);
+    }
+  }, [isActive, src]); */
+
+  /*   useEffect(() => {
+    if (bottomImageVisible) {
+      
+    }
+  }, [bottomImageVisible]);
+ */
+  /* useEffect(() => {
     if (topImageVisible) {
       //console.log("Set timer - ready to update");
       setReadyToUpdate(true);
     }
-  }, [topImageVisible, setReadyToUpdate]);
+  }, [topImageVisible, setReadyToUpdate]); */
 
   const isFullDisk = label.includes("Full Disk");
   const isGoesEastFullDisk = label.includes("GOES East Full Disk");
@@ -80,41 +106,38 @@ function FullImage({
     <div css={componentStyle({ isFullDisk, isGoesEastFullDisk })}>
       <div
         css={imgWrapperStyle({
-          isVisible: bottomImageLoaded && isActive,
-          isFullDisk,
-          isGoesEastFullDisk
+          isVisible: bottomImageLoaded
         })}
         onTransitionEnd={({ target }) => {
           const { opacity } = getComputedStyle(target);
           if (opacity === "1") {
-            //console.log("bottom img visible");
+            console.log("bottom img visible");
             setBottomImageVisible(true);
           }
           if (opacity === "0") {
-            //console.log("bottom img hidden");
+            console.log("bottom img hidden");
             setBottomImageVisible(false);
           }
         }}
       >
         <img
           onLoad={() => {
+            console.log("bottom image loaded");
             setBottomImageLoaded(true);
           }}
           css={imageStyle({ isFullDisk })}
-          src={placeholder}
+          src={bottomImgSrc}
           alt=""
         />
       </div>
       <div
         css={imgWrapperStyle({
-          isVisible: bottomImageVisible && isActive,
-          isFullDisk,
-          isGoesEastFullDisk
+          isVisible: bottomImageVisible && isLoaded
         })}
         onTransitionEnd={({ target }) => {
           const { opacity } = getComputedStyle(target);
           if (opacity === "1") {
-            //console.log("top img visible");
+            console.log("top img visible");
             setTopImageVisible(true);
           }
           if (opacity === "0") {
@@ -123,11 +146,7 @@ function FullImage({
           }
         }}
       >
-        <img
-          css={imageStyle({ isFullDisk })}
-          src={iLoaded ? src : ""}
-          alt={label}
-        />
+        <img css={imageStyle({ isFullDisk })} src={topImgSrc} alt={label} />
       </div>
       <div css={maskStyle({ isFullDisk, isGoesEastFullDisk })}>
         <svg viewBox="100 0 200 200" xmlns="http://www.w3.org/2000/svg">
