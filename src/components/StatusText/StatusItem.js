@@ -15,7 +15,11 @@ const bounce = keyframes`
     100%{transform: translate3d(-10%,0,0)}
 `;
 
-const wrapperStyle = ({ isLoading, isError }) => css`
+const wrapperStyle = ({
+  isLoading = false,
+  isError = false,
+  isVisible = false
+}) => css`
   position: relative;
   background: white;
   overflow: hidden;
@@ -31,7 +35,7 @@ const wrapperStyle = ({ isLoading, isError }) => css`
     width: 400%;
     height: 2px;
     background: blue;
-    display: ${isLoading ? "block" : "none"};
+    display: ${isLoading && isVisible ? "block" : "none"};
     transform: translate3d(0, 0, 0);
     background: ${isError
       ? "linear-gradient(270deg, #f74f0c, #ee4806, #ffbca2)"
@@ -75,7 +79,7 @@ function Component({
 }) {
   return (
     <Box css={componentStyle} pose={isVisible ? "visible" : "hidden"}>
-      <span css={wrapperStyle({ isLoading, isError })}>
+      <span css={wrapperStyle({ isLoading, isError, isVisible })}>
         <span css={labelStyle}>&nbsp;{label}:&nbsp;</span>
         <span css={nameStyle}>&nbsp;{value}&nbsp;</span>
       </span>
