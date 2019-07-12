@@ -32,12 +32,23 @@ function ImageCarousel({ isMenuOpen = false, closeMenu }) {
       selectedSources = [],
       activeSource = {},
       activeIndex = 0,
+      activeId = "",
+      selectedSourceIds = [],
       selectedImageRefreshInterval
     },
     setState,
     setActiveIndex,
     setActiveId
   } = useImageSource();
+
+  const setActiveImage = useCallback(
+    nextActiveIndex => {
+      const nextActiveId = selectedSources[nextActiveIndex].id;
+      setActiveIndex(nextActiveIndex);
+      setActiveId(nextActiveId);
+    },
+    [setActiveIndex, setActiveId, selectedSources]
+  );
 
   // set initial image source state
   useEffect(() => {
@@ -59,7 +70,7 @@ function ImageCarousel({ isMenuOpen = false, closeMenu }) {
           selectedSources: imageSourcesData
         };
       } else {
-        nextState = { ...imageSourceState, isImageLoading: false };
+        nextState = { ...imageSourceState };
       }
       setState(nextState);
     }
@@ -68,14 +79,11 @@ function ImageCarousel({ isMenuOpen = false, closeMenu }) {
     }
   }, [imageSources, setState]);
 
-  const setActiveImage = useCallback(
-    nextActiveIndex => {
-      const nextActiveId = selectedSources[nextActiveIndex].id;
-      setActiveIndex(nextActiveIndex);
-      setActiveId(nextActiveId);
-    },
-    [setActiveIndex, setActiveId, selectedSources]
-  );
+  useEffect(() => {
+    if (selectedSourceIds.length > 0 && !selectedSourceIds.includes(activeId)) {
+      setActiveImage(0);
+    }
+  }, [selectedSourceIds, activeId, setActiveImage]);
 
   useEffect(() => {
     let timer = null;
