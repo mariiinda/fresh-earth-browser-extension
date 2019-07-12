@@ -215,13 +215,13 @@ const copy = {
   <p>
     A side project made by
     <a
-      href="https://github.com/mariiinda"
+      href="https://marinda.me/"
       target="_blank"
       rel="noopener noreferrer"
     >
       Marinda</a>. Source code available on
       <a
-        href="https://github.com/mariiinda"
+        href="https://github.com/mariiinda/fresh-earth-browser-extension"
         target="_blank"
         rel="noopener noreferrer"
       >
