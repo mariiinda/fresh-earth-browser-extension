@@ -12,9 +12,9 @@ const copy = {
     Fresh Earth picks fresh and sharp satellite images and delivers it
     straight to your browser.
   </p>
-  <p>Refresh rate is once per hour, this can be changed to once every 20 minutes in the settings tab.</p>
+  <p>Refresh rate is once every 20 minutes.</p>
   <p>
-    The following geostationary satellite images will be shown in sequence, these can be adjusted in the settings tab:
+    The following geostationary satellite images will be shown in sequence:
   </p>
   <ul>
     <li>
@@ -75,6 +75,83 @@ const copy = {
         >
           Source URL
         </a></small>
+      </p>
+    </li>
+    <li>
+      <p>
+        <a
+          target="_blank"
+          rel="noopener noreferrer"
+          href="https://cdn.star.nesdis.noaa.gov/GOES16/ABI/CONUS/GEOCOLOR/5000x3000.jpg"
+        >
+        GOES East: Continental US
+        </a>
+      </p>
+    </li>
+    <li>
+      <p>
+        <a
+          target="_blank"
+          rel="noopener noreferrer"
+          href="https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/taw/GEOCOLOR/3600x2160.jpg"
+        >
+        GOES East: Tropical Atlantic
+        </a>
+      </p>
+    </li>
+    <li>
+      <p>
+        <a
+          target="_blank"
+          rel="noopener noreferrer"
+          href="https://cdn.star.nesdis.noaa.gov/GOES17/ABI/SECTOR/tpw/GEOCOLOR/3600x2160.jpg"
+        >
+        GOES West: Tropical Pacific
+        </a>
+      </p>
+    </li>
+    <li>
+      <p>
+        <a
+          target="_blank"
+          rel="noopener noreferrer"
+          href="https://cdn.star.nesdis.noaa.gov/GOES17/ABI/CONUS/GEOCOLOR/5000x3000.jpg"
+        >
+        GOES West: US West Coast
+        </a>
+      </p>
+    </li>
+    <li>
+      <p>
+        <a
+          target="_blank"
+          rel="noopener noreferrer"
+          href="https://cdn.star.nesdis.noaa.gov/GOES17/ABI/SECTOR/np/GEOCOLOR/7200x4320.jpg"
+        >
+        GOES West: Northern Pacific
+        </a>
+      </p>
+    </li>
+    <li>
+      <p>
+        <a
+          target="_blank"
+          rel="noopener noreferrer"
+          href="https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/nsa/GEOCOLOR/3600x2160.jpg"
+        >
+        GOES West: Northern South America
+        </a>
+      </p>
+    </li>
+    <li>
+      <p>
+        <a
+          target="_blank"
+          rel="noopener noreferrer"
+          href="https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/ssa/GEOCOLOR/3600x2160.jpg"
+        >
+        GOES East: Southern South America
+        </a>
       </p>
     </li>
   </ul>
