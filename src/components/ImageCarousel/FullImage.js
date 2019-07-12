@@ -6,12 +6,12 @@ import useImageLoad from "./useImageLoad";
 import { useNotifications } from "../../state/useNotifications";
 
 // CSS
-const componentStyle = ({ isFullDisk = false, isActive = false }) => css`
+const componentStyle = ({ isActive = false, adjustHeight = false }) => css`
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
+  height: ${adjustHeight ? "calc(100% + 30px)" : "100%"};
   z-index: ${isActive ? "var(--middle-z-index)" : "var(--bottom-z-index)"};
   background: var(--main-bg-color);
   opacity: ${isActive ? 1 : 0};
@@ -19,7 +19,7 @@ const componentStyle = ({ isFullDisk = false, isActive = false }) => css`
   will-change: opacity;
 `;
 
-const componentWrapperStyle = ({ isFullDisk = false, isActive = false }) => css`
+const componentWrapperStyle = ({ isFullDisk = false }) => css`
   position: absolute;
   top: ${isFullDisk ? "calc(5% - 10px)" : "0"};
   left: ${isFullDisk ? "5%" : "0"};
@@ -38,7 +38,7 @@ const imgWrapperStyle = ({ isVisible = false }) => css`
   will-change: opacity;
 `;
 
-const imageStyle = ({ isVisible = false, isFullDisk = false }) => css`
+const imageStyle = ({ isFullDisk = false }) => css`
   width: 100%;
   height: 100%;
   object-fit: ${isFullDisk ? "contain" : "cover"};
@@ -126,10 +126,13 @@ function FullImage({
 
   const isFullDisk = label.includes("Full Disk");
   const isGoesEastFullDisk = label.includes("GOES East Full Disk");
+  const adjustHeight =
+    label.includes("Northern South America") ||
+    label.includes("Southern South America");
 
   return (
-    <div css={componentStyle({ isFullDisk, isActive })}>
-      <div css={componentWrapperStyle({ isFullDisk, isActive })}>
+    <div css={componentStyle({ isActive, adjustHeight })}>
+      <div css={componentWrapperStyle({ isFullDisk })}>
         <div
           css={imgWrapperStyle({
             isVisible: bottomImageLoaded
