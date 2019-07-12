@@ -118,7 +118,6 @@ function ImageCarousel({ isMenuOpen = false, closeMenu }) {
       {selectedSources.length > 0 &&
         selectedSources.map(({ id, label, placeholder, src }, index) => {
           const isActive = activeSource.id === id;
-          //console.log({ activeIndex, index });
           return (
             <FullImage
               key={id}
