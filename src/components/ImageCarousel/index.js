@@ -79,12 +79,14 @@ function ImageCarousel({ isMenuOpen = false, closeMenu }) {
     }
   }, [imageSources, setState]);
 
+  // if selected sources change, reset active image
   useEffect(() => {
     if (selectedSourceIds.length > 0 && !selectedSourceIds.includes(activeId)) {
       setActiveImage(0);
     }
   }, [selectedSourceIds, activeId, setActiveImage]);
 
+  // refresh timer
   useEffect(() => {
     let timer = null;
     if (readyToUpdate) {

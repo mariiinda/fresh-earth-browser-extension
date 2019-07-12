@@ -64,6 +64,7 @@ function FullImage({
   const [topImageVisible, setTopImageVisible] = useState(false);
   const [isLoaded] = useImageLoad({ isActive, src });
 
+  // fade in placeholder image
   useEffect(() => {
     if (isActive && placeholder !== "") {
       console.log("Loading bottom image");
@@ -71,6 +72,7 @@ function FullImage({
     }
   }, [isActive, placeholder]);
 
+  // fade in top image
   useEffect(() => {
     if (bottomImageVisible && isLoaded) {
       console.log("Loading top image");
@@ -78,26 +80,25 @@ function FullImage({
     }
   }, [src, bottomImageVisible, isLoaded, setTopImgSrc]);
 
-  /* useEffect(() => {
-    if (isActive && src !=="") {
-      console.log("Is active state changed to true");
-      const [isLoaded] = useImageLoad({ src })
-      setBottomImgSrc(placeholder);
+  // reset
+  useEffect(() => {
+    if (!isActive) {
+      console.log("resetting");
+      setBottomImageVisible(false);
+      setBottomImgSrc("");
+      setBottomImageLoaded(false);
+      setTopImageVisible(false);
+      setTopImgSrc("");
     }
-  }, [isActive, src]); */
+  }, [isActive]);
 
-  /*   useEffect(() => {
-    if (bottomImageVisible) {
-      
-    }
-  }, [bottomImageVisible]);
- */
-  /* useEffect(() => {
+  // schedule update
+  useEffect(() => {
     if (topImageVisible) {
-      //console.log("Set timer - ready to update");
+      console.log("Set timer - ready to update");
       setReadyToUpdate(true);
     }
-  }, [topImageVisible, setReadyToUpdate]); */
+  }, [topImageVisible, setReadyToUpdate]);
 
   const isFullDisk = label.includes("Full Disk");
   const isGoesEastFullDisk = label.includes("GOES East Full Disk");
@@ -121,8 +122,8 @@ function FullImage({
         }}
       >
         <img
-          onLoad={() => {
-            console.log("bottom image loaded");
+          onLoad={({ target }) => {
+            console.log("bottom image loaded", { src: target.src });
             setBottomImageLoaded(true);
           }}
           css={imageStyle({ isFullDisk })}
