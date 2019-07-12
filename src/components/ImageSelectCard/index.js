@@ -8,6 +8,7 @@ const componentStyle = ({ isActive, disabled, checked }) => css`
   border-radius: 2px;
   padding: 36px 0 10px 0;
   background: var(--main-bg-color);
+  height: 160px;
   opacity: ${disabled ? 0.7 : 1};
   transition: opacity 0.3s ease-in-out;
 
@@ -15,7 +16,7 @@ const componentStyle = ({ isActive, disabled, checked }) => css`
     content: "";
     pointer-events: none;
     position: absolute;
-    z-index: 10;
+    z-index: 11;
     top: 0;
     left: 0;
     width: 100%;
@@ -30,7 +31,7 @@ const componentStyle = ({ isActive, disabled, checked }) => css`
     content: "";
     pointer-events: none;
     position: absolute;
-    z-index: 10;
+    z-index: 11;
     top: 0;
     left: 0;
     width: 100%;
@@ -43,7 +44,7 @@ const inputStyle = css`
   position: absolute;
   top: 0;
   left: 0;
-  z-index: 5;
+  z-index: 10;
   height: 1px;
   width: 1px;
   overflow: hidden;
@@ -69,23 +70,23 @@ const inputStyle = css`
 `;
 
 const imageWrapperStyle = css`
-  ${"" /* width: 100%; */}
-
-  width: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 9;
+  width: 160px;
+  height: 124px;
+  overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  height: 100%;
 `;
 
 const imageStyle = css`
-  ${"" /* width: auto;
-  height: 140px; */}
-
-  width: 100%;
-  height: auto;
-  object-fit: contain;
+  width: auto;
+  height: 100%;
+  object-fit: cover;
 `;
 
 const labelWrapperStyle = disabled => css`
@@ -94,7 +95,7 @@ const labelWrapperStyle = disabled => css`
   &:before {
     content: "";
     position: absolute;
-    z-index: 5;
+    z-index: 12;
     top: 6px;
     left: 6px;
     display: inline-block;
@@ -109,7 +110,7 @@ const labelWrapperStyle = disabled => css`
   &:after {
     content: "";
     position: absolute;
-    z-index: 6;
+    z-index: 13;
     top: 12px;
     left: 11px;
     border-left: 2px solid white;
@@ -124,18 +125,20 @@ const labelWrapperStyle = disabled => css`
 
 const labelStyle = css`
   position: absolute;
+  z-index: 10;
   top: 0;
   left: 0;
   width: 99%;
   background: white url("/diagonal-lines-faded.svg") 0 0 repeat;
-  letter-spacing: 0.63px;
+  line-height: 1.3rem;
+  font-size: 1.2rem;
   text-align: center;
   fill: white;
-  height: 36px;
+  height: 42px;
   display: flex;
   align-items: center;
   text-align: left;
-  padding: 0 0 0 40px;
+  padding: 0 10px 0 38px;
   border-bottom-right-radius: 10px;
   text-transform: uppercase;
   overflow: hidden;
@@ -145,12 +148,12 @@ const labelStyle = css`
     top: 0;
     left: 0;
     width: 98%;
-    z-index: 4;
+    z-index: 10;
   }
 
   > span {
     position: relative;
-    z-index: 5;
+    z-index: 11;
     color: var(--main-bg-color);
   }
 `;
@@ -158,23 +161,23 @@ const labelStyle = css`
 function Component({
   id = "",
   label = "",
-  thumb = "",
+  placeholder = "",
   onChange,
   checked = false,
   disabled = false,
   isActive = false
 }) {
   const isChromeExtension = window.chrome && window.chrome.extension;
-  const thumbUrl =
-    isChromeExtension && thumb !== ""
-      ? window.chrome.extension.getURL(thumb)
-      : thumb;
+  const placeholderUrl =
+    isChromeExtension && placeholder !== ""
+      ? window.chrome.extension.getURL(placeholder)
+      : placeholder;
   return (
     <div css={componentStyle({ isActive, disabled, checked })}>
       <input
         css={inputStyle}
         name={id}
-        id={`${id}-input`}
+        id={`input-${id}`}
         checked={checked}
         type="checkbox"
         disabled={disabled}
@@ -182,13 +185,13 @@ function Component({
           onChange({ target, id });
         }}
       />
-      <label css={labelWrapperStyle(disabled)} htmlFor={`${id}-input`}>
+      <label css={labelWrapperStyle(disabled)} htmlFor={`input-${id}`}>
         <span css={labelStyle}>
           <span>{label}</span>
         </span>
 
         <div css={imageWrapperStyle}>
-          <img css={imageStyle} src={thumbUrl} alt={label} />
+          <img css={imageStyle} src={placeholderUrl} alt={label} />
         </div>
       </label>
     </div>

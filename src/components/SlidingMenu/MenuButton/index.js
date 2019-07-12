@@ -35,7 +35,6 @@ const componentStyle = isOpen => css`
     display: flex;
     align-items: flex-end;
     text-transform: uppercase;
-
     opacity: 0;
     transition: opacity 0.3s ease-in-out;
   }

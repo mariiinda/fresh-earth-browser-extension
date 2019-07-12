@@ -1,21 +1,18 @@
-import React, { useMemo, useContext } from "react";
+import React, { useMemo, useContext, useCallback } from "react";
 
 // storage middleware
 import useImageSourceWithStorage from "../middleware/useImageSourceWithStorage";
 
 // Reducer
-const imageSourcesInitialState = {
+const initialState = {
   activeIndex: "0",
   activeId: "",
   imageSources: [],
   activeSource: {},
   selectedSourceIds: [],
   selectedSources: [],
-  refreshDate: null,
-  hasImageLoadError: false,
-  isImageLoading: false,
-  selectedImageRefreshInterval: 0.14 * 60e3,
-  imageRefreshIntervalOptions: [0.14 * 60e3, 20 * 60e3, 60 * 60e3]
+  selectedImageRefreshInterval: 20 * 60e3,
+  imageRefreshIntervalOptions: [20 * 60e3, 60 * 60e3]
 };
 
 const updateSelectedSourceIds = ({ state, action, isRemove = false }) => {
@@ -39,7 +36,7 @@ const updateSelectedSourceIds = ({ state, action, isRemove = false }) => {
   };
 };
 
-function imageSourceReducer(state, action) {
+function reducer(state, action) {
   const { type = "" } = action;
   switch (type) {
     case "SET_ACTIVE_INDEX":
@@ -52,7 +49,7 @@ function imageSourceReducer(state, action) {
         activeSource: state.imageSources.filter(({ id }) => id === action.id)[0]
       };
 
-    case "ADD_SELECTED_SOURCE_ID":
+    case "ADD_SELECTED_SOURCE_IDS":
       return {
         ...state,
         ...updateSelectedSourceIds({ state, action })
@@ -64,17 +61,8 @@ function imageSourceReducer(state, action) {
         ...updateSelectedSourceIds({ state, action, isRemove: true })
       };
 
-    case "SET_REFRESH_DATE":
-      return { ...state, refreshDate: action.refreshDate };
-
     case "SET_STATE":
       return { ...state, ...action.state };
-
-    case "SET_IMAGE_LOAD_ERROR":
-      return { ...state, hasImageLoadError: action.hasImageLoadError };
-
-    case "SET_IS_IMAGE_LOADING":
-      return { ...state, isImageLoading: action.isImageLoading };
 
     case "SET_SELECTED_IMAGE_REFRESH_INTERVAL":
       return {
@@ -90,10 +78,7 @@ function imageSourceReducer(state, action) {
 // Provider
 const ImageSourceContext = React.createContext();
 function ImageSourceProvider(props) {
-  const [state, dispatch] = useImageSourceWithStorage(
-    imageSourceReducer,
-    imageSourcesInitialState
-  );
+  const [state, dispatch] = useImageSourceWithStorage(reducer, initialState);
   const value = useMemo(() => [state, dispatch], [state, dispatch]);
   return <ImageSourceContext.Provider value={value} {...props} />;
 }
@@ -105,39 +90,40 @@ function useImageSource() {
     throw new Error(`useImageSource must be used within a ImageSourceContext`);
   }
   const [state, dispatch] = context;
-  const setActiveIndex = index => dispatch({ type: "SET_ACTIVE_INDEX", index });
 
-  const setActiveId = id => {
-    return dispatch({ type: "SET_ACTIVE_ID", id });
-  };
+  const setActiveIndex = useCallback(
+    index => dispatch({ type: "SET_ACTIVE_INDEX", index }),
+    [dispatch]
+  );
 
-  const addSelectedSourceIds = id => {
-    return dispatch({ type: "ADD_SELECTED_SOURCE_ID", id });
-  };
+  const setActiveId = useCallback(
+    id => dispatch({ type: "SET_ACTIVE_ID", id }),
+    [dispatch]
+  );
 
-  const removeSelectedSourceIds = id => {
-    dispatch({ type: "REMOVE_SELECTED_SOURCE_ID", id });
-  };
+  const addSelectedSourceIds = useCallback(
+    id => dispatch({ type: "ADD_SELECTED_SOURCE_IDS", id }),
+    [dispatch]
+  );
 
-  const setRefreshDate = refreshDate =>
-    dispatch({ type: "SET_REFRESH_DATE", refreshDate });
+  const removeSelectedSourceIds = useCallback(
+    id => dispatch({ type: "REMOVE_SELECTED_SOURCE_ID", id }),
+    [dispatch]
+  );
 
-  const setState = state => dispatch({ type: "SET_STATE", state });
+  const setState = useCallback(
+    state => dispatch({ type: "SET_STATE", state }),
+    [dispatch]
+  );
 
-  const setImageLoadError = hasImageLoadError => {
-    dispatch({ type: "SET_IMAGE_LOAD_ERROR", hasImageLoadError });
-  };
-
-  const setIsImageLoading = isImageLoading => {
-    dispatch({ type: "SET_IS_IMAGE_LOADING", isImageLoading });
-  };
-
-  const setSelectedImageRefreshInterval = selectedImageRefreshInterval => {
-    dispatch({
-      type: "SET_SELECTED_IMAGE_REFRESH_INTERVAL",
-      selectedImageRefreshInterval
-    });
-  };
+  const setSelectedImageRefreshInterval = useCallback(
+    selectedImageRefreshInterval =>
+      dispatch({
+        type: "SET_SELECTED_IMAGE_REFRESH_INTERVAL",
+        selectedImageRefreshInterval
+      }),
+    [dispatch]
+  );
 
   return {
     state,
@@ -146,11 +132,8 @@ function useImageSource() {
     setActiveId,
     addSelectedSourceIds,
     removeSelectedSourceIds,
-    setRefreshDate,
     setState,
-    setImageLoadError,
-    setSelectedImageRefreshInterval,
-    setIsImageLoading
+    setSelectedImageRefreshInterval
   };
 }
 

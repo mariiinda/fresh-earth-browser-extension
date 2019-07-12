@@ -3,12 +3,14 @@ import { jsx, css } from "@emotion/core";
 
 import { useImageSource } from "../../state/useImageSource";
 import { useLocalization } from "../../state/useLocalization";
+import { useNotifications } from "../../state/useNotifications";
 
 import StatusItem from "./StatusItem";
 
 // CSS
-const componentStyle = css`
+const componentStyle = ({ isMenuOpen=false }) => css`
   position: absolute;
+  z-index: var(--top-z-index);
   bottom: 20px;
   right: 20px;
   text-align: right;
@@ -17,18 +19,20 @@ const componentStyle = css`
   font-size: 1.2rem;
   color: var(--main-bg-color);
   line-height: 3rem;
+  opacity: ${!isMenuOpen ? 1 : 0};
+  transition: opacity 2s 0.05s ease-in-out;
+  will-change: opacity;
 `;
 
-function Component() {
+function Component({ isMenuOpen = false }) {
   // hooks
   const {
-    state: {
-      refreshDate = null,
-      activeSource = {},
-      hasImageLoadError = false,
-      isImageLoading = false
-    }
+    state: { activeSource = {} }
   } = useImageSource();
+
+  const {
+    state: { isPending, hasError, refreshDate = null }
+  } = useNotifications();
 
   var options = {
     year: "numeric",
@@ -44,21 +48,21 @@ function Component() {
 
   const isOffline = !(window.navigator && window.navigator.onLine);
   return (
-    <div css={componentStyle}>
+    <div css={componentStyle({ isMenuOpen })}>
       <StatusItem
-        isVisible={activeSource.label}
+        isVisible={activeSource.label && !isPending}
         label={copy.satellite}
         value={activeSource.spacecraft}
       />
 
       <StatusItem
-        isVisible={activeSource.label}
+        isVisible={activeSource.label && !isPending}
         label={copy.view}
         value={activeSource.label}
       />
 
       <StatusItem
-        isVisible={isImageLoading}
+        isVisible={isPending}
         label={copy.status}
         value={copy.loading}
         isLoading={true}
@@ -66,7 +70,10 @@ function Component() {
 
       <StatusItem
         isVisible={
-          refreshDate !== null && date !== "Invalid Date" && !isImageLoading
+          refreshDate !== null &&
+          date !== "Invalid Date" &&
+          !isPending &&
+          !hasError
         }
         label={copy.refreshed}
         value={date}
@@ -79,9 +86,11 @@ function Component() {
       />
 
       <StatusItem
-        isVisible={hasImageLoadError}
+        isVisible={hasError}
         label={copy.status}
         value={copy.imageError}
+        isLoading={true}
+        isError={true}
       />
     </div>
   );
