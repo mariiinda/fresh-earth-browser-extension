@@ -66,7 +66,10 @@ function Component() {
 
       <StatusItem
         isVisible={
-          refreshDate !== null && date !== "Invalid Date" && !isPending
+          refreshDate !== null &&
+          date !== "Invalid Date" &&
+          !isPending &&
+          !hasError
         }
         label={copy.refreshed}
         value={date}
