@@ -128,6 +128,7 @@ function FullImage({
   const isGoesEastFullDisk = label.includes("GOES East Full Disk");
   const adjustHeight =
     label.includes("Northern South America") ||
+    label.includes("Tropical Atlantic") ||
     label.includes("Southern South America");
 
   return (
