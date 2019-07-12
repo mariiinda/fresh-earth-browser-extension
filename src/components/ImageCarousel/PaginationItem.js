@@ -46,12 +46,12 @@ const labelStyle = css`
   box-shadow: 0 0px 8px var(--main-dark-color);
   opacity: 0;
   transition: opacity 0.3s ease-in-out;
+  pointer-events: none;
 `;
 
 function PaginationItem({
   isActive = false,
   label = "",
-  id = "",
   index = null,
   onClick
 }) {

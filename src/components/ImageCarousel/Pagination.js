@@ -27,7 +27,6 @@ function Pagination({ items = [], activeId = "", onClick }) {
               key={id}
               label={label}
               isActive={isActive}
-              id={id}
               onClick={onClick}
               index={index}
             />
