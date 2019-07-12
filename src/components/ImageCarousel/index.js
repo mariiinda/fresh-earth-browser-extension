@@ -89,16 +89,13 @@ function ImageCarousel({ isMenuOpen = false, closeMenu }) {
   useEffect(() => {
     let timer = null;
     if (readyToUpdate) {
-      //console.log("ready to update, setting timer");
       timer = setTimeout(() => {
-        //console.log("update timer running");
         const nextActiveIndex =
           activeIndex + 1 > selectedSources.length - 1 ? 0 : activeIndex + 1;
         setActiveImage(nextActiveIndex);
       }, selectedImageRefreshInterval);
     }
     return () => {
-      //console.log("cleaning up timer");
       clearTimeout(timer);
     };
   }, [

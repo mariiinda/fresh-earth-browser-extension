@@ -82,9 +82,8 @@ function FullImage({
   // fade in placeholder image
   useEffect(() => {
     if (isActive && placeholder !== "") {
-      //setIsPending(true);
       setReadyToUpdate(false);
-      console.log("Loading bottom image");
+
       setBottomImgSrc(placeholder);
     }
   }, [isActive, placeholder, setReadyToUpdate, setIsPending]);
@@ -92,34 +91,26 @@ function FullImage({
   // fade in top image
   useEffect(() => {
     if (bottomImageVisible && isLoaded) {
-      console.log("Loading top image");
       setTopImgSrc(src);
     }
   }, [src, bottomImageVisible, isLoaded, setTopImgSrc]);
 
   // reset
   useEffect(() => {
-    //let timer = null;
     if (!isActive && bottomImgSrc !== "" && !isPending) {
-      //timer = setTimeout(() => {
-      console.log("resetting ---");
       setBottomImageVisible(false);
       setBottomImgSrc("");
       setBottomImageLoaded(false);
       setTopImageVisible(false);
       setTopImgSrc("");
-      //}, 1000);
     }
-    /* return () => {
-      clearTimeout(timer);
-    }; */
   }, [isActive, bottomImgSrc, isPending]);
 
   // schedule update
   useEffect(() => {
     if (topImageVisible) {
       setIsPending(false);
-      console.log("Set timer - ready to update");
+
       setReadyToUpdate(true);
     }
   }, [topImageVisible, setReadyToUpdate, setIsPending]);
@@ -141,18 +132,15 @@ function FullImage({
           onTransitionEnd={({ target }) => {
             const { opacity } = getComputedStyle(target);
             if (opacity === "1") {
-              console.log("bottom img visible");
               setBottomImageVisible(true);
             }
             if (opacity === "0") {
-              console.log("bottom img hidden");
               setBottomImageVisible(false);
             }
           }}
         >
           <img
             onLoad={({ target }) => {
-              console.log("bottom image loaded", { src: target.src });
               setBottomImageLoaded(true);
             }}
             css={imageStyle({ isFullDisk })}
@@ -167,11 +155,9 @@ function FullImage({
           onTransitionEnd={({ target }) => {
             const { opacity } = getComputedStyle(target);
             if (opacity === "1") {
-              console.log("top img visible");
               setTopImageVisible(true);
             }
             if (opacity === "0") {
-              console.log("top img hidden");
               setTopImageVisible(false);
             }
           }}
