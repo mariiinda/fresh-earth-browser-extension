@@ -108,8 +108,7 @@ function Component() {
               <AboutTab />
             </Tabs>
           </SlidingMenu>
-
-          <StatusText />
+          <StatusText isMenuOpen={menuState.isOpen} />
         </NotificationsProvider>
       </ImageSourceProvider>
     </div>

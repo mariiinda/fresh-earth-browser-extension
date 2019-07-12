@@ -30,9 +30,13 @@ const fieldsetStyle = css`
 
 const selectWrapper = css`
   display: grid;
-  grid-template-columns: repeat(2, 160px);
+  grid-template-columns: repeat(3, 160px);
   grid-gap: 6px;
   margin-bottom: 20px;
+
+  @media (min-width: 720px) {
+    grid-template-columns: repeat(2, 160px);
+  }
 `;
 
 // Animation

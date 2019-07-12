@@ -8,7 +8,7 @@ import { useNotifications } from "../../state/useNotifications";
 import StatusItem from "./StatusItem";
 
 // CSS
-const componentStyle = css`
+const componentStyle = ({ isMenuOpen=false }) => css`
   position: absolute;
   z-index: var(--top-z-index);
   bottom: 20px;
@@ -19,9 +19,12 @@ const componentStyle = css`
   font-size: 1.2rem;
   color: var(--main-bg-color);
   line-height: 3rem;
+  opacity: ${!isMenuOpen ? 1 : 0};
+  transition: opacity 2s 0.05s ease-in-out;
+  will-change: opacity;
 `;
 
-function Component() {
+function Component({ isMenuOpen = false }) {
   // hooks
   const {
     state: { activeSource = {} }
@@ -45,7 +48,7 @@ function Component() {
 
   const isOffline = !(window.navigator && window.navigator.onLine);
   return (
-    <div css={componentStyle}>
+    <div css={componentStyle({ isMenuOpen })}>
       <StatusItem
         isVisible={activeSource.label && !isPending}
         label={copy.satellite}
