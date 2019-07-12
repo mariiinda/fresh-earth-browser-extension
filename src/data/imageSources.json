@@ -4,69 +4,69 @@
     "spacecraft": "GOES East",
     "label": "GOES East Full Disk",
     "placeholder": "images/goes-east-5424x5424.jpg",
-    "src": "images/original/goes-east-5424x5424.jpg"
+    "src": "https://cdn.star.nesdis.noaa.gov/GOES16/ABI/FD/GEOCOLOR/5424x5424.jpg"
   },
   {
     "id": "goes-west-full-disk",
     "spacecraft": "GOES West",
     "label": "GOES West Full Disk",
     "placeholder": "images/goes-west-5424x5424.jpg",
-    "src": "images/original/goes-west-5424x5424.jpg"
+    "src": "https://cdn.star.nesdis.noaa.gov/GOES17/ABI/FD/GEOCOLOR/5424x5424.jpg"
   },
   {
     "id": "himawari-8-full-disk",
     "spacecraft": "Himawari 8",
     "label": "Himawari 8 Full Disk",
     "placeholder": "images/himiwarifull_disk_ahi_true_color.jpg",
-    "src": "images/original/himiwarifull_disk_ahi_true_color.jpg"
+    "src": "http://rammb.cira.colostate.edu/ramsdis/online/images/latest_hi_res/himawari-8/full_disk_ahi_true_color.jpg"
   },
   {
     "id": "continental-us",
     "spacecraft": "GOES East",
     "label": "Continental US",
     "placeholder": "images/continental-us-5000x3000.jpg",
-    "src": "images/original/continental-us-5000x3000.jpg"
+    "src": "https://cdn.star.nesdis.noaa.gov/GOES16/ABI/CONUS/GEOCOLOR/5000x3000.jpg"
   },
   {
     "id": "tropical-atlantic",
     "spacecraft": "GOES East",
     "label": "Tropical Atlantic",
     "placeholder": "images/tropical-atlantic3600x2160.jpg",
-    "src": "images/original/tropical-atlantic3600x2160.jpg"
+    "src": "https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/taw/GEOCOLOR/3600x2160.jpg"
   },
   {
     "id": "tropical-pacific",
     "spacecraft": "GOES West",
     "label": "Tropical Pacific",
     "placeholder": "images/tropical-pacific3600x2160.jpg",
-    "src": "images/original/tropical-pacific3600x2160.jpg"
+    "src": "https://cdn.star.nesdis.noaa.gov/GOES17/ABI/SECTOR/tpw/GEOCOLOR/3600x2160.jpg"
   },
   {
     "id": "us-west-coast",
     "spacecraft": "GOES West",
     "label": "US West Coast",
     "placeholder": "images/us-west-coast-5000x3000.jpg",
-    "src": "images/original/us-west-coast-5000x3000.jpg"
+    "src": "https://cdn.star.nesdis.noaa.gov/GOES17/ABI/CONUS/GEOCOLOR/5000x3000.jpg"
   },
   {
     "id": "northern-pacific",
     "spacecraft": "GOES West",
     "label": "Northern Pacific",
     "placeholder": "images/northern-pacific-5000x3000.jpg",
-    "src": "images/original/northern-pacific-5000x3000.jpg"
+    "src": "https://cdn.star.nesdis.noaa.gov/GOES17/ABI/SECTOR/np/GEOCOLOR/7200x4320.jpg"
   },
   {
     "id": "northern-south-america",
     "spacecraft": "GOES West",
     "label": "Northern South America",
     "placeholder": "images/northern-south-america-3600x2160.jpg",
-    "src": "images/original/northern-south-america-3600x2160.jpg"
+    "src": "https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/nsa/GEOCOLOR/3600x2160.jpg"
   },
   {
     "id": "southern-south-america",
     "spacecraft": "GOES East",
     "label": "Southern South America",
     "placeholder": "images/south-america-3600x2160.jpg",
-    "src": "images/original/south-america-3600x2160.jpg"
+    "src": "https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/ssa/GEOCOLOR/3600x2160.jpg"
   }
 ]
