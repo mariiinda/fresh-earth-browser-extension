@@ -59,7 +59,8 @@ function PaginationItem({
     <button
       type="button"
       css={componentStyle({ isActive })}
-      onClick={() => {
+      onClick={({ target }) => {
+        target.blur();
         onClick(index);
       }}
     >
