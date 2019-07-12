@@ -10,6 +10,7 @@ import StatusItem from "./StatusItem";
 // CSS
 const componentStyle = css`
   position: absolute;
+  z-index: var(--top-z-index);
   bottom: 20px;
   right: 20px;
   text-align: right;

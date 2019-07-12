@@ -28,7 +28,7 @@ function useImageLoad({ src = "", isActive }) {
       (async () => {
         try {
           const value = await loadImage({ src });
-          setIsPending(false);
+          //setIsPending(false);
           setHasError(false);
           setRefreshDate(new Date());
           setIsLoaded(value);

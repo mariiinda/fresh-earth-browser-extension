@@ -3,13 +3,23 @@ import { useState, useEffect } from "react";
 import { jsx, css } from "@emotion/core";
 
 import useImageLoad from "./useImageLoad";
-//import { useNotifications } from "../../state/useNotifications";
+import { useNotifications } from "../../state/useNotifications";
 
 // CSS
-const componentStyle = ({
-  isFullDisk = false,
-  isGoesEastFullDisk = false
-}) => css`
+const componentStyle = ({ isFullDisk = false, isActive = false }) => css`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: ${isActive ? "var(--middle-z-index)" : "var(--bottom-z-index)"};
+  background: var(--main-bg-color);
+  opacity: ${isActive ? 1 : 0};
+  transition: opacity 2s 0.05s ease-in-out;
+  will-change: opacity;
+`;
+
+const componentWrapperStyle = ({ isFullDisk = false, isActive = false }) => css`
   position: absolute;
   top: ${isFullDisk ? "calc(5% - 10px)" : "0"};
   left: ${isFullDisk ? "5%" : "0"};
@@ -64,13 +74,20 @@ function FullImage({
   const [topImageVisible, setTopImageVisible] = useState(false);
   const [isLoaded] = useImageLoad({ isActive, src });
 
+  const {
+    state: { isPending },
+    setIsPending
+  } = useNotifications();
+
   // fade in placeholder image
   useEffect(() => {
     if (isActive && placeholder !== "") {
+      //setIsPending(true);
+      setReadyToUpdate(false);
       console.log("Loading bottom image");
       setBottomImgSrc(placeholder);
     }
-  }, [isActive, placeholder]);
+  }, [isActive, placeholder, setReadyToUpdate, setIsPending]);
 
   // fade in top image
   useEffect(() => {
@@ -82,81 +99,90 @@ function FullImage({
 
   // reset
   useEffect(() => {
-    if (!isActive) {
-      console.log("resetting");
+    //let timer = null;
+    if (!isActive && bottomImgSrc !== "" && !isPending) {
+      //timer = setTimeout(() => {
+      console.log("resetting ---");
       setBottomImageVisible(false);
       setBottomImgSrc("");
       setBottomImageLoaded(false);
       setTopImageVisible(false);
       setTopImgSrc("");
+      //}, 1000);
     }
-  }, [isActive]);
+    /* return () => {
+      clearTimeout(timer);
+    }; */
+  }, [isActive, bottomImgSrc, isPending]);
 
   // schedule update
   useEffect(() => {
     if (topImageVisible) {
+      setIsPending(false);
       console.log("Set timer - ready to update");
       setReadyToUpdate(true);
     }
-  }, [topImageVisible, setReadyToUpdate]);
+  }, [topImageVisible, setReadyToUpdate, setIsPending]);
 
   const isFullDisk = label.includes("Full Disk");
   const isGoesEastFullDisk = label.includes("GOES East Full Disk");
 
   return (
-    <div css={componentStyle({ isFullDisk, isGoesEastFullDisk })}>
-      <div
-        css={imgWrapperStyle({
-          isVisible: bottomImageLoaded
-        })}
-        onTransitionEnd={({ target }) => {
-          const { opacity } = getComputedStyle(target);
-          if (opacity === "1") {
-            console.log("bottom img visible");
-            setBottomImageVisible(true);
-          }
-          if (opacity === "0") {
-            console.log("bottom img hidden");
-            setBottomImageVisible(false);
-          }
-        }}
-      >
-        <img
-          onLoad={({ target }) => {
-            console.log("bottom image loaded", { src: target.src });
-            setBottomImageLoaded(true);
+    <div css={componentStyle({ isFullDisk, isActive })}>
+      <div css={componentWrapperStyle({ isFullDisk, isActive })}>
+        <div
+          css={imgWrapperStyle({
+            isVisible: bottomImageLoaded
+          })}
+          onTransitionEnd={({ target }) => {
+            const { opacity } = getComputedStyle(target);
+            if (opacity === "1") {
+              console.log("bottom img visible");
+              setBottomImageVisible(true);
+            }
+            if (opacity === "0") {
+              console.log("bottom img hidden");
+              setBottomImageVisible(false);
+            }
           }}
-          css={imageStyle({ isFullDisk })}
-          src={bottomImgSrc}
-          alt=""
-        />
-      </div>
-      <div
-        css={imgWrapperStyle({
-          isVisible: bottomImageVisible && isLoaded
-        })}
-        onTransitionEnd={({ target }) => {
-          const { opacity } = getComputedStyle(target);
-          if (opacity === "1") {
-            console.log("top img visible");
-            setTopImageVisible(true);
-          }
-          if (opacity === "0") {
-            //console.log("top img hidden");
-            setTopImageVisible(false);
-          }
-        }}
-      >
-        <img css={imageStyle({ isFullDisk })} src={topImgSrc} alt={label} />
-      </div>
-      <div css={maskStyle({ isFullDisk, isGoesEastFullDisk })}>
-        <svg viewBox="100 0 200 200" xmlns="http://www.w3.org/2000/svg">
-          <path
-            d="M0 0h400v200H0V0zm200 200c-55.228 0-100-44.772-100-100S144.772 0 200 0s100 44.772 100 100-44.772 100-100 100zM0 200h400v20H0v-20z"
-            fill="inherit"
-            fillRule="evenodd"
+        >
+          <img
+            onLoad={({ target }) => {
+              console.log("bottom image loaded", { src: target.src });
+              setBottomImageLoaded(true);
+            }}
+            css={imageStyle({ isFullDisk })}
+            src={bottomImgSrc}
+            alt=""
           />
-        </svg>
+        </div>
+        <div
+          css={imgWrapperStyle({
+            isVisible: bottomImageVisible && isLoaded
+          })}
+          onTransitionEnd={({ target }) => {
+            const { opacity } = getComputedStyle(target);
+            if (opacity === "1") {
+              console.log("top img visible");
+              setTopImageVisible(true);
+            }
+            if (opacity === "0") {
+              console.log("top img hidden");
+              setTopImageVisible(false);
+            }
+          }}
+        >
+          <img css={imageStyle({ isFullDisk })} src={topImgSrc} alt="" />
+        </div>
+        <div css={maskStyle({ isFullDisk, isGoesEastFullDisk })}>
+          <svg viewBox="100 0 200 200" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M0 0h400v200H0V0zm200 200c-55.228 0-100-44.772-100-100S144.772 0 200 0s100 44.772 100 100-44.772 100-100 100zM0 200h400v20H0v-20z"
+              fill="inherit"
+              fillRule="evenodd"
+            />
+          </svg>
+        </div>
       </div>
     </div>
   );

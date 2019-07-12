@@ -1,7 +1,6 @@
 /** @jsx jsx */
 import { useState, useEffect, useCallback } from "react";
 import { jsx, css } from "@emotion/core";
-//import posed from "react-pose";
 
 import FullImage from "./FullImage";
 // data
@@ -117,8 +116,9 @@ function ImageCarousel({ isMenuOpen = false, closeMenu }) {
   return (
     <div css={componentStyle({ isMenuOpen })} onClick={closeMenu}>
       {selectedSources.length > 0 &&
-        selectedSources.map(({ id, label, placeholder, src }) => {
+        selectedSources.map(({ id, label, placeholder, src }, index) => {
           const isActive = activeSource.id === id;
+          //console.log({ activeIndex, index });
           return (
             <FullImage
               key={id}

@@ -6,6 +6,7 @@ import PaginationItem from "./PaginationItem";
 // CSS
 const componentStyle = css`
   position: absolute;
+  z-index: var(--top-z-index);
   bottom: 0;
   left: 0;
   width: 100%;
