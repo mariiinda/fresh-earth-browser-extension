@@ -9,11 +9,6 @@ Experience a gorgeous fresh and sharp image from various geostationary satellite
 
 Install Fresh Earth from [Chrome Web Store](https://chrome.google.com/webstore/detail/blpcojibadbbfolamclodcdgpbhbplgo/publish-accepted?authuser=0&hl=en).
 
-## About
-A side project built whilst trying to learn:
-- React hooks
-- Publishing a chrome extension
-
 ## Credit
 
     NASA, NOAA, JMA, Lockheed Martin, Harris Corporation, ULA, MHI and
