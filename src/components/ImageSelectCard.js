@@ -158,7 +158,7 @@ const labelStyle = css`
   }
 `;
 
-function Component({
+function ImageSelectCard({
   id = "",
   label = "",
   placeholder = "",
@@ -198,4 +198,4 @@ function Component({
   );
 }
 
-export default Component;
+export default ImageSelectCard;

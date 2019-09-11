@@ -2,7 +2,7 @@
 import React, { useEffect } from "react";
 import { jsx, css } from "@emotion/core";
 
-import CloseButton from "./CloseButton/";
+import CloseButton from "./SlidingMenuCloseButton";
 
 function Component({ isOpen, onClose, controlId = "menu-button", children }) {
   let menuArea = React.createRef();

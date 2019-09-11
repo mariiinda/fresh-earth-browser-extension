@@ -39,7 +39,7 @@ const Heading = posed.h1({
   props: { i: 0 }
 });
 
-function Component({ isMenuOpen = false }) {
+function Logo({ isMenuOpen = false }) {
   return (
     <Heading css={componentStyle} pose={isMenuOpen ? "visible" : "hidden"}>
       <svg viewBox="0 0 258 145">
@@ -65,4 +65,4 @@ function Component({ isMenuOpen = false }) {
   );
 }
 
-export default Component;
+export default Logo;

@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import { jsx, css } from "@emotion/core";
 
-function Component({ blobUrl = "", filename = "image", text }) {
+function DownloadButton({ blobUrl = "", filename = "image", text }) {
   return (
     <a
       href={blobUrl}
@@ -77,4 +77,4 @@ function Component({ blobUrl = "", filename = "image", text }) {
   );
 }
 
-export default Component;
+export default DownloadButton;

@@ -2,8 +2,8 @@
 import { useState, useEffect } from "react";
 import { jsx, css } from "@emotion/core";
 
-import useImageLoad from "./useImageLoad";
-import { useNotifications } from "../../state/useNotifications";
+import useImageLoad from "../hooks/useImageLoad";
+import { useNotifications } from "../state/useNotifications";
 
 // CSS
 const componentStyle = ({ isActive = false, adjustHeight = false }) => css`
@@ -60,7 +60,7 @@ const maskStyle = ({ isFullDisk = false, isGoesEastFullDisk = false }) => css`
   }
 `;
 
-function FullImage({
+function ImageCarouselFullImage({
   label = "",
   placeholder = "",
   src = "",
@@ -178,4 +178,4 @@ function FullImage({
   );
 }
 
-export default FullImage;
+export default ImageCarouselFullImage;

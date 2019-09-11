@@ -60,7 +60,7 @@ const componentStyle = () => css`
   }
 `;
 
-function Component({ id, text, onClick, isOpen }) {
+function SlidingMenuCloseButton({ id, text, onClick, isOpen }) {
   return (
     <button
       css={componentStyle()}
@@ -96,4 +96,4 @@ function Component({ id, text, onClick, isOpen }) {
   );
 }
 
-export default Component;
+export default SlidingMenuCloseButton;

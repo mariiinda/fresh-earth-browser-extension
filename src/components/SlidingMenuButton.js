@@ -2,7 +2,7 @@
 import { jsx, css } from "@emotion/core";
 
 // CSS
-const componentStyle = css`
+const componentStyle = isOpen => css`
   position: relative;
   z-index: var(--top-z-index);
   width: 34px;
@@ -12,8 +12,9 @@ const componentStyle = css`
   text-decoration: none;
   text-align: center;
   line-height: 1.3rem;
-  cursor: posinter;
+  cursor: pointer;
   transition: all 0.3s ease-in;
+  opacity: ${isOpen ? 0 : 1};
 
   &:hover,
   &:focus {
@@ -26,7 +27,7 @@ const componentStyle = css`
     position: absolute;
     height: 100%;
     top: 0;
-    left: 7px;
+    left: 3px;
     z-index: 5;
     color: currentColor;
     font-size: 1.1rem;
@@ -49,37 +50,32 @@ const componentStyle = css`
   }
 `;
 
-function Component({ text = "" }) {
-  if (!(window.chrome && window.chrome.tabs)) return null;
+function SlidingMenuButton({ text, onClick, isOpen, id = "menu-button" }) {
   return (
     <button
-      css={componentStyle}
-      onClick={() => {
-        window.chrome.tabs.getCurrent(tab => {
-          window.chrome.tabs.update(tab.id, {
-            url: "chrome://apps/"
-          });
-        });
+      type="button"
+      id={id}
+      aria-controls="sliding-menu-content"
+      aria-expanded={isOpen}
+      aria-label="Open and view site options and about information"
+      tabIndex={isOpen ? -1 : 0}
+      aria-hidden={isOpen}
+      onClick={event => {
+        onClick();
+        event.currentTarget.blur();
       }}
+      css={componentStyle(isOpen)}
     >
-      <svg viewBox="0 0 58 58" aria-hidden="true" focusable="false">
-        <g fill="none" fillRule="evenodd">
-          <g fill="#F9CE1C">
-            <path d="M44 44h14v14H44zM22 44h14v14H22zM44 22h14v14H44z" />
-          </g>
-          <g fill="#389C5C">
-            <path d="M0 44h14v14H0zM0 22h14v14H0z" />
-          </g>
-          <path fill="#02B0FF" d="M22 22h14v14H22z" />
-          <g fill="#F55253">
-            <path d="M44 0h14v14H44zM22 0h14v14H22zM0 0h14v14H0z" />
-          </g>
+      <svg viewBox="0 0 24 22" aria-hidden="true" focusable="false">
+        <g fill="inherit" fillRule="evenodd">
+          <path d="M0 0h24v4H0z" />
+          <path opacity=".8" d="M0 9h24v4H0z" />
+          <path opacity=".6" d="M0 18h24v4H0z" />
         </g>
       </svg>
-
       <span>{text}</span>
     </button>
   );
 }
 
-export default Component;
+export default SlidingMenuButton;

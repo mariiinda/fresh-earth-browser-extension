@@ -51,7 +51,7 @@ const componentStyle = isSelected => css`
   }
 `;
 
-function Component({ id, children, onClick, isSelected, tabIndex }) {
+function TabButton({ id, children, onClick, isSelected, tabIndex }) {
   return (
     <button
       css={componentStyle(isSelected)}
@@ -67,4 +67,4 @@ function Component({ id, children, onClick, isSelected, tabIndex }) {
   );
 }
 
-export default Component;
+export default TabButton;

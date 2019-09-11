@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-import { useNotifications } from "../../state/useNotifications";
+import { useNotifications } from "../state/useNotifications";
 
 const loadImage = ({ src }) => {
   const img = new Image();

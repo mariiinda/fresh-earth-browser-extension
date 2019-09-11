@@ -1,14 +1,14 @@
 /** @jsx jsx */
 import { jsx, css } from "@emotion/core";
 
-import { useImageSource } from "../../state/useImageSource";
-import { useLocalization } from "../../state/useLocalization";
-import { useNotifications } from "../../state/useNotifications";
+import { useImageSource } from "../state/useImageSource";
+import { useLocalization } from "../state/useLocalization";
+import { useNotifications } from "../state/useNotifications";
 
 import StatusItem from "./StatusItem";
 
 // CSS
-const componentStyle = ({ isMenuOpen=false }) => css`
+const componentStyle = ({ isMenuOpen = false }) => css`
   position: absolute;
   z-index: var(--top-z-index);
   bottom: 20px;
@@ -24,7 +24,7 @@ const componentStyle = ({ isMenuOpen=false }) => css`
   will-change: opacity;
 `;
 
-function Component({ isMenuOpen = false }) {
+function StatusText({ isMenuOpen = false }) {
   // hooks
   const {
     state: { activeSource = {} }
@@ -96,4 +96,4 @@ function Component({ isMenuOpen = false }) {
   );
 }
 
-export default Component;
+export default StatusText;

@@ -2,13 +2,13 @@
 import { useState, useEffect, useCallback } from "react";
 import { jsx, css } from "@emotion/core";
 
-import FullImage from "./FullImage";
+import FullImage from "./ImageCarouselFullImage";
 // data
-import imageSourcesData from "../../data/imageSources.json";
+import imageSourcesData from "../data/imageSources.json";
 // state
-import { useImageSource } from "../../state/useImageSource";
+import { useImageSource } from "../state/useImageSource";
 // utils
-import StorageWrapper from "../../storage/storageWrapper";
+import StorageWrapper from "../storage/storageWrapper";
 import Pagination from "./Pagination";
 
 // CSS

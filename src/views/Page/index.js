@@ -4,7 +4,7 @@ import { jsx, css } from "@emotion/core";
 
 // components
 import AppButton from "../../components/AppButton";
-import MenuButton from "../../components/SlidingMenu/MenuButton";
+import MenuButton from "../../components/SlidingMenuButton";
 import SlidingMenu from "../../components/SlidingMenu";
 import Logo from "../../components/Logo";
 import Tabs from "../../components/Tabs";

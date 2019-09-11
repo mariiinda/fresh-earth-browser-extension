@@ -65,7 +65,7 @@ const tabButtonWrapperStyle = css`
   }
 `;
 
-function Component({ tabList = [], children = null, isMenuOpen = false }) {
+function Tabs({ tabList = [], children = null, isMenuOpen = false }) {
   const tabArea = React.createRef();
 
   // hooks
@@ -157,4 +157,4 @@ function Component({ tabList = [], children = null, isMenuOpen = false }) {
   );
 }
 
-export default Component;
+export default Tabs;

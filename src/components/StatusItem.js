@@ -70,7 +70,7 @@ const Box = posed.div({
   hidden: { opacity: 0, height: 0 }
 });
 
-function Component({
+function StatusItem({
   isVisible = false,
   label = "",
   value = "",
@@ -87,4 +87,4 @@ function Component({
   );
 }
 
-export default Component;
+export default StatusItem;

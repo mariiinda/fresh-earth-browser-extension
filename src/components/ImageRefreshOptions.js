@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import { jsx, css } from "@emotion/core";
 
-import RadioInput from "../RadioInput/index";
+import RadioInput from "./RadioInput";
 
 // CSS
 const componentStyle = css`
@@ -32,7 +32,7 @@ const formatSecondsIntoHours = ({ seconds, label }) => {
   return `${Number(seconds) / 60e3 / 60} ${label}`;
 };
 
-function Component({
+function ImageRefreshOptions({
   options = [],
   minutesLabel,
   hoursLabel,
@@ -55,4 +55,4 @@ function Component({
   );
 }
 
-export default Component;
+export default ImageRefreshOptions;

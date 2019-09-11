@@ -100,7 +100,7 @@ const labelStyle = css`
   }
 `;
 
-function Component({ id = "", label = "", onChange, checked = false }) {
+function RadioInput({ id = "", label = "", onChange, checked = false }) {
   return (
     <div css={componentStyle({ checked })}>
       <input
@@ -122,4 +122,4 @@ function Component({ id = "", label = "", onChange, checked = false }) {
   );
 }
 
-export default Component;
+export default RadioInput;
