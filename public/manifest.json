@@ -13,7 +13,7 @@
   "chrome_url_overrides": {
     "newtab": "index.html"
   },
-  "permissions": ["storage", "tabs"],
+  "permissions": ["storage"],
   "web_accessible_resources": [
     "images/goes-east-5424x5424.jpg",
     "images/goes-west-5424x5424.jpg",
