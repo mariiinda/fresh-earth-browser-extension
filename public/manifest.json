@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "Fresh Earth",
   "author": "Marinda S",
-  "version": "0.0.0.1",
+  "version": "0.0.0.2",
   "description": "Fresh Earth picks fresh and sharp satellite images and delivers it straight to your browser.",
   "icons": {
     "16": "16.png",
