@@ -44,9 +44,9 @@ const imageStyle = ({ isFullDisk = false }) => css`
   object-fit: ${isFullDisk ? "contain" : "cover"};
 `;
 
-const maskStyle = ({ isFullDisk = false, isGoesEastFullDisk = false }) => css`
+const maskStyle = ({ isFullDisk = false }) => css`
   position: absolute;
-  top: ${isGoesEastFullDisk ? "-9px" : 0};
+  top: -8px;
   left: 0;
   width: 100%;
   height: 100%;

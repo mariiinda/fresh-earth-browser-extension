@@ -1,20 +1,20 @@
 /** @jsx jsx */
-import { jsx, css } from "@emotion/core";
+import { jsx, css } from '@emotion/core';
 
 // CSS
 const componentStyle = ({ isActive = false }) => css`
   position: relative;
   width: 10px;
   height: 10px;
-  background: ${isActive ? "rgba(255,255,255,0.8)" : "rgba(255,255,255,0.3)"};
+  background: ${isActive ? 'rgba(255,255,255,0.8)' : 'rgba(255,255,255,0.3)'};
   border-radius: 50%;
   margin-right: 10px;
   border: ${isActive
-    ? "var(--secondary-highlight-color) solid 1px"
-    : "transparent solid 1px"};
+    ? 'var(--secondary-highlight-color) solid 1px'
+    : 'transparent solid 1px'};
   box-shadow: ${isActive
-    ? "0 0px 8px var(--secondary-highlight-color);"
-    : "none"};
+    ? '0 0 8px var(--secondary-highlight-color)'
+    : '0 0 10px var(--main-bg-color), 0 0 10px var(--main-bg-color), 0 0 10px var(--main-bg-color)'};
   transition: background 0.3s ease-in-out;
   opacity: 0.8;
 
@@ -51,7 +51,7 @@ const labelStyle = css`
 
 function PaginationItem({
   isActive = false,
-  label = "",
+  label = '',
   index = null,
   onClick
 }) {
@@ -59,6 +59,7 @@ function PaginationItem({
     <button
       type="button"
       css={componentStyle({ isActive })}
+      title={label}
       onClick={({ target }) => {
         target.blur();
         onClick(index);
