@@ -1,7 +1,7 @@
 /** @jsx jsx */
-import { jsx, css } from "@emotion/core";
+import { jsx, css } from '@emotion/core';
 
-import PaginationItem from "./PaginationItem";
+import PaginationItem from './PaginationItem';
 
 // CSS
 const componentStyle = css`
@@ -16,7 +16,7 @@ const componentStyle = css`
   align-items: center;
 `;
 
-function Pagination({ items = [], activeId = "", onClick }) {
+function Pagination({ items = [], activeId = '', onClick }) {
   return (
     <div css={componentStyle}>
       {items.length > 0 &&
