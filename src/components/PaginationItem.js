@@ -14,7 +14,7 @@ const componentStyle = ({ isActive = false }) => css`
     : 'transparent solid 1px'};
   box-shadow: ${isActive
     ? '0 0 8px var(--secondary-highlight-color)'
-    : '0 0 10px var(--main-bg-color), 0 0 10px var(--main-bg-color)'};
+    : '0 0 10px var(--main-bg-color), 0 0 10px var(--main-bg-color), 0 0 10px var(--main-bg-color)'};
   transition: background 0.3s ease-in-out;
   opacity: 0.8;
 
