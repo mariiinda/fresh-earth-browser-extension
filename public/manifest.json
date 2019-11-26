@@ -24,6 +24,10 @@
     "images/us-west-coast-5000x3000.jpg",
     "images/northern-pacific-5000x3000.jpg",
     "images/northern-south-america-3600x2160.jpg",
-    "images/south-america-3600x2160.jpg"
+    "images/south-america-3600x2160.jpg",
+    "fonts/IBMPlexMono.woff",
+    "fonts/IBMPlexMono.woff2",
+    "fonts/Poppins-Regular.woff",
+    "fonts/Poppins-Regular.woff2"
   ]
 }
