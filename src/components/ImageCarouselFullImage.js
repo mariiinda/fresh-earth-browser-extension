@@ -46,7 +46,7 @@ const imageStyle = ({ isFullDisk = false }) => css`
 
 const maskStyle = ({ isFullDisk = false }) => css`
   position: absolute;
-  top: -8px;
+  top: -10px;
   left: 0;
   width: 100%;
   height: 100%;
